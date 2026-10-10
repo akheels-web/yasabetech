@@ -11,21 +11,24 @@
   - Backgrounds: `#ffffff` (Pure White) and `#f8fafc` / `#f1f5f9` (Soft Platinum Slate)
   - Borders: `#e2e8f0` / `#cbd5e1`
 
-## Bespoke 3D Graphics & Visual Showcase (Hero & Services)
-- `public/hero-graphic.jpg`: High-resolution 3D enterprise topology featuring central holographic AI chip, 400G optical conduits, and server modules on pristine white background.
-- `public/service-networking.jpg`: 3D enterprise core switch rack with glowing cyan fiber optic conduits and holographic Wi-Fi 7 radio waves.
-- `public/service-ai.jpg`: 3D NVIDIA HGX liquid-cooled GPU supercomputing server node with holographic neural processor.
-- `public/service-managed.jpg`: 3D datacenter NVMe SAN storage bays with 24/7 holographic security shield and cloud telemetry monitors.
-- **Hero Interactive Switcher**:
-  - Allows instant toggling between **Full Stack (Integrated)**, **Networking (400G & Wi-Fi 7)**, **AI Compute (HGX Clusters)**, and **Managed IT (24/7 NOC/SOC)** with live updating 3D renders and telemetry metrics.
-- **Three Pillars Section**:
-  - Each pillar card features the corresponding 3D hardware graphic with domain badges.
+## Interactive 3D WebGL Hero & Graphics Architecture
+- **Interactive Three.js Canvas (`src/components/hero-3d-scene.tsx`)**:
+  - WebGL particle constellation field with glowing cyber orbital rings in electric cyan and royal purple.
+  - Interactive mouse tilt and camera rotation responding in real time to the user's cursor.
+- **3D Crystalline Holographic AI & Network Sphere (`public/hero-3d-sphere.jpg`)**:
+  - Centerpiece floating glassmorphic sphere with glowing central neural processor and fiber optic conduits.
+  - Floating 3D holographic telemetry badges:
+    - `400G Optical Fabric` (< 0.8ms Latency • 0% Loss)
+    - `Sovereign AI Node` (NVIDIA HGX H100 Active)
+- **Direct 3D Service Showcase Cards in Hero**:
+  - **Enterprise Networking**: Bespoke 3D core switch render (`public/service-networking.jpg`), Wi-Fi 7 specs, and direct RFQ trigger.
+  - **Sovereign AI Infrastructure**: Bespoke 3D liquid-cooled GPU supercomputer render (`public/service-ai.jpg`), local LLM fine-tuning specs, and direct RFQ trigger.
+  - **Managed IT & 24/7 Operations**: Bespoke 3D datacenter NVMe SAN & SOC unit render (`public/service-managed.jpg`), sub-15m SLA response, and direct RFQ trigger.
 
 ## Pages Implemented
 1. **Home (`/`)**:
-   - Hero with interactive 3D centerpiece switcher, floating telemetry badges, and live OEM partners.
+   - Hero with interactive 3D WebGL canvas, floating holographic sphere, telemetry badges, and 3D service cards.
    - Authorized Partner OEM strip (**Cisco Gold, NVIDIA Elite, Dell Titanium, Fortinet Expert, HPE, Microsoft**).
-   - Core 3 Pillars deep-dive cards with bespoke 3D graphics.
    - Enterprise SLA metrics counter.
    - Why Yasabe Technologies (BOQ Review, Staging Lab, Serialized OEM Warranties).
    - Real-world Case Studies (Banking, Sovereign Healthcare, Logistics).
@@ -45,6 +48,7 @@
 
 ## Technical Details
 - Next.js 16.4 App Router with Turbopack bundler (`next dev --turbopack`).
+- Three.js (`three` + `@types/three`) for real-time 3D WebGL rendering.
 - Tailwind CSS v4 with custom `@theme inline` variables.
 - Radix UI primitives (`@radix-ui/react-dialog`, `@radix-ui/react-tabs`, `@radix-ui/react-slot`).
 - Lucide React icons.
