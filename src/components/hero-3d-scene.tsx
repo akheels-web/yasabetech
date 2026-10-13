@@ -3,11 +3,7 @@
 import * as React from "react"
 import * as THREE from "three"
 
-interface Hero3DSceneProps {
-  activeDomain?: "networking" | "ai" | "managed-it"
-}
-
-export function Hero3DScene({ activeDomain = "ai" }: Hero3DSceneProps) {
+export function Hero3DScene() {
   const mountRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
@@ -50,7 +46,6 @@ export function Hero3DScene({ activeDomain = "ai" }: Hero3DSceneProps) {
 
     const colorCyan = new THREE.Color(0x00b4d8)
     const colorIndigo = new THREE.Color(0x6355ec)
-    const colorNavy = new THREE.Color(0x0b1a3d)
 
     for (let i = 0; i < pointCount; i++) {
       const phi = Math.acos(-1 + (2 * i) / pointCount)
@@ -125,11 +120,11 @@ export function Hero3DScene({ activeDomain = "ai" }: Hero3DSceneProps) {
 
     // Animation Loop
     let animationFrameId: number
-    let clock = new THREE.Clock()
+    const startTime = performance.now()
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
-      const elapsedTime = clock.getElapsedTime()
+      const elapsedTime = (performance.now() - startTime) * 0.001
 
       // Smooth mouse follow
       mainGroup.rotation.y += (targetRotationY - mainGroup.rotation.y) * 0.05

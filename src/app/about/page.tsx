@@ -2,25 +2,11 @@
 
 import * as React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { 
-  Building2, 
   ShieldCheck, 
-  Award, 
-  CheckCircle2, 
-  Users, 
-  Globe2, 
   Cpu, 
-  Network, 
-  Server, 
   FileSpreadsheet, 
-  ArrowRight,
-  Sparkles,
-  MapPin,
   Clock,
-  Briefcase,
-  Layers,
-  FileCheck2,
   Workflow
 } from "lucide-react"
 import { Button } from "@/components/ui/button"

@@ -8,9 +8,7 @@ import {
   Menu, 
   X, 
   FileSpreadsheet, 
-  Phone,
-  ShieldCheck,
-  Sparkles
+  Phone
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { RFQModal } from "@/components/rfq-modal"
@@ -38,7 +36,7 @@ export function Navbar() {
             </span>
             <span className="hidden sm:inline text-slate-300">|</span>
             <span className="hidden sm:inline text-slate-600 font-medium">
-              Authorized Partner for Cisco, NVIDIA, Dell & Fortinet
+              Authorized Partner for Cisco, NVIDIA, Dell &amp; Fortinet
             </span>
           </div>
           <div className="flex items-center gap-4 text-slate-600 font-medium">
@@ -58,7 +56,7 @@ export function Navbar() {
       </div>
 
       {/* Main Glass Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/90 backdrop-blur-xl shadow-xs">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/85 backdrop-blur-xl shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-3 group">

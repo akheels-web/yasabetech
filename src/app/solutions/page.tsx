@@ -1,27 +1,16 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import { 
   Network, 
   Cpu, 
   Server, 
-  Wifi, 
-  ShieldCheck, 
-  Layers, 
-  Database, 
-  Terminal, 
   CheckCircle2, 
   FileSpreadsheet, 
-  ArrowRight, 
-  Zap, 
-  Clock, 
-  Lock, 
   Search, 
   SlidersHorizontal,
   ChevronDown,
-  Sparkles,
-  Award
+  Sparkles
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -451,7 +440,7 @@ export default function SolutionsPage() {
               <Search className="h-10 w-10 text-slate-400 mx-auto mb-3" />
               <h3 className="text-lg font-bold text-slate-900 font-heading">No solutions matched your search</h3>
               <p className="text-xs text-slate-500 mt-1">
-                Try searching with different keywords like "SD-WAN", "H100", "NOC", or "Wi-Fi".
+                Try searching with different keywords like &quot;SD-WAN&quot;, &quot;H100&quot;, &quot;NOC&quot;, or &quot;Wi-Fi&quot;.
               </p>
               <Button
                 variant="outline"

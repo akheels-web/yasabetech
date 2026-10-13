@@ -30,8 +30,10 @@ interface RFQModalProps {
   initialCategory?: string
 }
 
-export function RFQModal({ open, onOpenChange, initialCategory }: RFQModalProps) {
-  const [selectedServices, setSelectedServices] = React.useState<string[]>([])
+export function RFQModal({ open, onOpenChange, initialCategory = "networking" }: RFQModalProps) {
+  const [selectedServices, setSelectedServices] = React.useState<string[]>([
+    initialCategory,
+  ])
   const [company, setCompany] = React.useState("")
   const [email, setEmail] = React.useState("")
   const [phone, setPhone] = React.useState("")
@@ -40,11 +42,20 @@ export function RFQModal({ open, onOpenChange, initialCategory }: RFQModalProps)
   const [isSubmitted, setIsSubmitted] = React.useState(false)
   const [rfqReference, setRfqReference] = React.useState("")
 
-  React.useEffect(() => {
-    if (initialCategory && !selectedServices.includes(initialCategory)) {
-      setSelectedServices([initialCategory])
-    }
-  }, [initialCategory])
+  const resetForm = () => {
+    setSelectedServices(initialCategory ? [initialCategory] : [])
+    setIsSubmitted(false)
+    setRfqReference("")
+    setCompany("")
+    setEmail("")
+    setPhone("")
+    setScopeDetails("")
+  }
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) resetForm()
+    onOpenChange(nextOpen)
+  }
 
   const serviceOptions = [
     { id: "networking", label: "Enterprise Networking (SD-WAN / Wi-Fi 7)", icon: Network },
@@ -69,17 +80,12 @@ export function RFQModal({ open, onOpenChange, initialCategory }: RFQModalProps)
   }
 
   const handleReset = () => {
-    setIsSubmitted(false)
-    setCompany("")
-    setEmail("")
-    setPhone("")
-    setScopeDetails("")
-    setSelectedServices([])
+    resetForm()
     onOpenChange(false)
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-xl bg-white border border-slate-200 text-slate-900 shadow-2xl">
         {!isSubmitted ? (
           <>
