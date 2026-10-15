@@ -47,7 +47,7 @@ export function Footer() {
               <Phone className="h-4 w-4" />
               +966 11 829 4400
             </a>
-            <p>Muscath, Oman</p>
+            <p>Muscat, Oman</p>
           </div>
         </div>
         <div className="footer-bottom">
