@@ -164,7 +164,7 @@ export default function AboutPage() {
       <section className="contact-section">
         <div className="site-container contact-layout">
           <div>
-            <p className="section-kicker">Based in Riyadh. Built around you.</p>
+            <p className="section-kicker">Based in Oman. Built around you.</p>
             <h2>
               Your infrastructure.
               <br />
