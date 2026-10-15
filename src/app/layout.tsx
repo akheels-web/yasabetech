@@ -43,7 +43,10 @@ export const metadata: Metadata = {
     "Enterprise IT Support",
   ],
   icons: {
-    icon: "/logo.webp",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     apple: "/apple-touch-icon.png",
   },
   alternates: { canonical: "/" },
@@ -56,10 +59,10 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/hero-graphic.webp",
-        width: 1100,
-        height: 821,
-        alt: "Connected enterprise infrastructure",
+        url: "/images/workspace-hero.webp",
+        width: 1200,
+        height: 900,
+        alt: "A contemporary workspace built around people and possibility",
       },
     ],
   },
@@ -68,7 +71,7 @@ export const metadata: Metadata = {
     title: "Yasabe Technologies",
     description:
       "Built for what comes next. Enterprise networking, private AI and managed IT.",
-    images: ["/hero-graphic.webp"],
+    images: ["/images/workspace-hero.webp"],
   },
 };
 

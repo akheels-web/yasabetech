@@ -1,0 +1,6 @@
+# Local Pages runtime bindings. Copy to .dev.vars and fill locally; never commit real keys.
+ZOHO_EMAIL_API_KEY=
+ZOHO_EMAIL_FROM=website@yasabetech.com
+# Use the exact sending endpoint for your Zoho account's data center.
+ZOHO_EMAIL_API_URL=https://cpaas.zoho.com/v1.1/email
+TURNSTILE_SECRET_KEY=

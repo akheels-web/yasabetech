@@ -12,7 +12,7 @@ export function Footer() {
                 src="/logo.webp"
                 alt="Yasabe Technologies"
                 width={180}
-                height={120}
+                height={54}
                 className="brand-image"
               />
             </Link>
@@ -38,9 +38,9 @@ export function Footer() {
           </div>
           <div className="footer-contact">
             <h2>Let’s connect</h2>
-            <a href="mailto:rfq@yasabetech.com">
+            <a href="mailto:sales@yasabetech.com">
               <Mail className="h-4 w-4" />
-              rfq@yasabetech.com
+              sales@yasabetech.com
               <ArrowUpRight className="h-3 w-3" />
             </a>
             <a href="tel:+966118294400">

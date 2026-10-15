@@ -25,7 +25,9 @@ const services = [
     label: "Enterprise networking",
     description:
       "From the campus to the data center. Build resilient SD-WAN, high-density wireless and high-speed network fabrics around the way your business works.",
-    image: "/service-networking.webp",
+    image: "/images/connected-workplace.webp",
+    imageAlt:
+      "Professionals collaborating in a contemporary office lounge and glass meeting room",
     tags: ["SD-WAN", "Wi-Fi 7", "Data center fabrics"],
   },
   {
@@ -35,7 +37,9 @@ const services = [
     label: "Private AI & compute",
     description:
       "Bring intelligence closer to your data with GPU infrastructure, private language models and on-premise inference designed for your workloads.",
-    image: "/service-ai.webp",
+    image: "/images/ai-innovation.webp",
+    imageAlt:
+      "Technology researcher working at a laptop in a bright innovation workspace",
     tags: ["GPU clusters", "Private LLMs", "Data sovereignty"],
   },
   {
@@ -45,7 +49,9 @@ const services = [
     label: "Managed IT & security",
     description:
       "Keep your infrastructure in experienced hands. Monitoring, storage, backup and incident support, brought together under a clearly defined service agreement.",
-    image: "/service-managed.webp",
+    image: "/images/technology-operations.webp",
+    imageAlt:
+      "Two technology professionals reviewing work together at a laptop",
     tags: ["24/7 monitoring", "Hybrid cloud", "Backup & recovery"],
   },
 ];
@@ -107,13 +113,13 @@ export default function HomePage() {
           </div>
           <div className="hero-visual">
             <div className="hero-visual-label">
-              <span className="status-dot" /> Infrastructure, working together
+              <span className="status-dot" /> Technology, designed around people
             </div>
             <Image
-              src="/hero-graphic.webp"
-              alt="Illustration of interconnected AI compute, networking and server infrastructure"
+              src="/images/workspace-hero.webp"
+              alt="Sunlit contemporary business atrium with open staircases, greenery and a city view"
               width={1200}
-              height={896}
+              height={900}
               sizes="(max-width: 900px) 100vw, 58vw"
               preload
               className="hero-art"
@@ -121,8 +127,8 @@ export default function HomePage() {
             <div className="hero-visual-caption">
               <Network className="h-5 w-5" />
               <div>
-                <strong>Connected by design.</strong>
-                <span>Network. Compute. Security.</span>
+                <strong>Built around your business.</strong>
+                <span>People. Ideas. Possibility.</span>
               </div>
               <span className="caption-line" />
               <ArrowUpRight className="h-5 w-5" />
@@ -161,9 +167,9 @@ export default function HomePage() {
               >
                 <Image
                   src={service.image}
-                  alt={`${service.label} infrastructure illustration`}
-                  width={640}
-                  height={640}
+                  alt={service.imageAlt}
+                  width={900}
+                  height={675}
                   sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
                   className="service-image"
                 />
@@ -315,8 +321,8 @@ export default function HomePage() {
             >
               Talk to our team <ArrowUpRight className="ml-4 h-5 w-5" />
             </Button>
-            <a href="mailto:rfq@yasabetech.com">
-              rfq@yasabetech.com <ArrowUpRight className="h-4 w-4" />
+            <a href="mailto:sales@yasabetech.com">
+              sales@yasabetech.com <ArrowUpRight className="h-4 w-4" />
             </a>
             <span>Prefer to share a document? Attach it to your email.</span>
           </div>

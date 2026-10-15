@@ -39,7 +39,7 @@ export function Navbar() {
       <div className="utility-bar">
         <div className="site-container">
           <span>Enterprise networking, private AI & managed IT</span>
-          <a href="mailto:rfq@yasabetech.com">
+          <a href="mailto:sales@yasabetech.com">
             Let’s talk about your next project{" "}
             <ArrowUpRight className="h-3 w-3" />
           </a>
@@ -57,8 +57,8 @@ export function Navbar() {
               src="/logo.webp"
               alt="Yasabe Technologies"
               width={180}
-              height={120}
-              preload
+              height={54}
+              priority
               className="brand-image"
             />
           </Link>

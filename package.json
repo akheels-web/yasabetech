@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "node scripts/preview.mjs",
     "preview": "node scripts/preview.mjs",
+    "preview:functions": "wrangler pages dev out",
+    "check:functions": "wrangler pages functions build --outdir .wrangler/functions",
+    "test": "node --test tests/enquiry.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint"
   },
@@ -15,7 +18,8 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.21",
-    "@radix-ui/react-dialog": "^1.2.0",
+    "@radix-ui/react-dialog": "^1.3.1",
+    "@radix-ui/react-select": "^2.4.1",
     "@radix-ui/react-slot": "^1.4.0",
     "@radix-ui/react-tabs": "^1.1.22",
     "@types/three": "^0.186.0",
@@ -36,6 +40,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.151.0"
   }
 }

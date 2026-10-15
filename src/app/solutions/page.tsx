@@ -84,7 +84,7 @@ const blueprints = {
 const faqs = [
   {
     q: "Can I share an existing BOQ or tender document?",
-    a: "Yes. Prepare an enquiry using the project form, then attach your spreadsheet, PDF or tender document in your email app. You can also email rfq@yasabetech.com directly.",
+    a: "Yes. Send your requirements using the project form. For spreadsheets, PDFs or tender documents, email sales@yasabetech.com directly and include your enquiry reference if you have one.",
   },
   {
     q: "How do I choose the right infrastructure?",

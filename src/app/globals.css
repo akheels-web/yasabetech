@@ -288,9 +288,11 @@ html {
 body {
   color: var(--ink);
 }
-:focus-visible {
-  outline: 3px solid #6487f7;
-  outline-offset: 4px;
+@layer base {
+  :focus-visible {
+    outline: 3px solid #6487f7;
+    outline-offset: 4px;
+  }
 }
 button,
 a {
@@ -352,11 +354,12 @@ button {
 }
 .brand-link {
   display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 .brand-image {
-  width: 139px;
-  height: 78px;
+  width: auto;
+  height: 48px;
   object-fit: contain;
 }
 .desktop-nav {
@@ -504,7 +507,7 @@ button {
   width: 115%;
   max-width: none;
   margin-left: -5%;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
 }
 .hero-visual-label {
   display: flex;
@@ -886,7 +889,6 @@ button {
 .footer-brand > a {
   display: block;
   width: fit-content;
-  margin-top: -14px;
 }
 .footer-brand > p {
   max-width: 230px;
@@ -1002,6 +1004,14 @@ button {
 .quote-field textarea {
   font-weight: 400;
 }
+.form-control:focus-visible {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgb(41 77 230 / 10%);
+}
+.form-control[data-state="open"] {
+  border-color: var(--blue);
+}
 .quote-service {
   display: flex;
   align-items: center;
@@ -1057,8 +1067,8 @@ button {
     height: 78px;
   }
   .brand-image {
-    width: 125px;
-    height: 68px;
+    width: auto;
+    height: 42px;
   }
   .desktop-nav,
   .header-cta {
@@ -1153,8 +1163,8 @@ button {
     height: 72px;
   }
   .brand-image {
-    width: 113px;
-    height: 65px;
+    width: auto;
+    height: 36px;
   }
   .hero-layout {
     padding-top: 38px;

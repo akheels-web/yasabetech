@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowUpRight, Check, Loader2, Mail } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select } from "@/components/ui/select";
+import { EnquiryVerification } from "@/components/enquiry-verification";
 import { solutionCategories } from "@/lib/solution-categories";
+import { PROJECT_TIMELINES, SALES_EMAIL } from "@/lib/enquiry";
 
 const options = [
   ...solutionCategories.map((category) => ({
@@ -41,6 +44,7 @@ export function RFQModal({
           key={`${initialCategory}-${initialScope}`}
           initialCategory={initialCategory}
           initialScope={initialScope}
+          onDone={() => onOpenChange(false)}
         />
       </DialogContent>
     </Dialog>
@@ -50,46 +54,79 @@ export function RFQModal({
 function QuoteForm({
   initialCategory,
   initialScope,
+  onDone,
 }: {
   initialCategory: string;
   initialScope: string;
+  onDone: () => void;
 }) {
   const [services, setServices] = useState([initialCategory]);
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [timeline, setTimeline] = useState("Planning / exploring options");
+  const [timeline, setTimeline] = useState<string>(PROJECT_TIMELINES[0]);
   const [scope, setScope] = useState(initialScope);
-  const [ready, setReady] = useState(false);
-  const [copyStatus, setCopyStatus] = useState("");
-  const serviceNames = options
-    .filter((option) => services.includes(option.id))
-    .map((option) => option.label)
-    .join(", ");
-  const subject = `Project enquiry — ${company}`;
-  const body = `Hello Yasabe team,\n\nI would like to discuss the following project.\n\nCompany: ${company}\nWork email: ${email}\nPhone: ${phone || "Not provided"}\nServices: ${serviceNames}\nTimeline: ${timeline}\n\nProject details:\n${scope || "To be discussed"}\n\nPlease contact me to review the scope and quotation.`;
-  const mailto = `mailto:rfq@yasabetech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        `To: rfq@yasabetech.com\nSubject: ${subject}\n\n${body}`,
+  const [website, setWebsite] = useState("");
+  const [token, setToken] = useState("");
+  const [verificationVersion, setVerificationVersion] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [reference, setReference] = useState("");
+  const [error, setError] = useState("");
+  const submissionLock = useRef(false);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (submissionLock.current) return;
+    setError("");
+    if (!siteKey) {
+      setError(
+        `Online enquiries are temporarily unavailable. Please email ${SALES_EMAIL}.`,
       );
-      setCopyStatus("Copied to clipboard");
-    } catch {
-      setCopyStatus("Select and copy the request text below.");
+      return;
     }
-  };
-  const download = () => {
-    const url = URL.createObjectURL(
-      new Blob([`To: rfq@yasabetech.com\nSubject: ${subject}\n\n${body}`], {
-        type: "text/plain;charset=utf-8",
-      }),
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "yasabe-project-enquiry.txt";
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if (!token) {
+      setError("Please complete the verification and try again.");
+      return;
+    }
+    submissionLock.current = true;
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(30000),
+        body: JSON.stringify({
+          services,
+          company,
+          email,
+          phone,
+          timeline,
+          scope,
+          website,
+          turnstileToken: token,
+        }),
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || typeof result?.reference !== "string")
+        throw new Error(
+          typeof result?.message === "string"
+            ? result.message
+            : `We couldn’t confirm your submission. Please try again or email ${SALES_EMAIL}.`,
+        );
+      setReference(result.reference);
+    } catch (failure) {
+      setError(
+        failure instanceof Error && failure.name === "Error"
+          ? failure.message
+          : `We couldn’t confirm your submission. Please try again or email ${SALES_EMAIL}.`,
+      );
+      setToken("");
+      setVerificationVersion((version) => version + 1);
+    } finally {
+      submissionLock.current = false;
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -99,23 +136,43 @@ function QuoteForm({
           Let’s build something that works.
         </p>
         <DialogTitle className="text-3xl font-medium leading-tight">
-          {ready ? "Your email draft is ready." : "Tell us about your project."}
+          {reference ? "Enquiry submitted." : "Tell us about your project."}
         </DialogTitle>
         <DialogDescription className="pt-2 leading-relaxed">
-          {ready
-            ? "Review your request, then open your email app and send it to our team. Your request has not been sent yet."
-            : "Prepare an enquiry for rfq@yasabetech.com. You’ll review and send it from your email app; no details are stored on this site."}
+          {reference
+            ? `Your request has been accepted for email delivery to ${SALES_EMAIL}. Our team can reply to the work email you provided.`
+            : `Share your requirements and we’ll send your enquiry directly to our team at ${SALES_EMAIL}.`}
         </DialogDescription>
       </DialogHeader>
-      {!ready ? (
+      {reference ? (
+        <div className="space-y-5 py-2">
+          <div className="flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-blue-700">
+              <Check className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-slate-900">
+                Thank you, {company}.
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                Keep this reference for any follow-up:
+              </p>
+              <p className="mt-2 break-all font-mono text-xs text-blue-700">
+                {reference}
+              </p>
+            </div>
+          </div>
+          <Button variant="brand" className="w-full" onClick={onDone}>
+            Done
+          </Button>
+        </div>
+      ) : (
         <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            setReady(true);
-          }}
+          onSubmit={submit}
           className="space-y-5 mt-1"
+          aria-busy={submitting}
         >
-          <fieldset>
+          <fieldset disabled={submitting}>
             <legend className="text-xs font-semibold mb-2">
               What can we help with? Choose at least one.
             </legend>
@@ -150,6 +207,7 @@ function QuoteForm({
                 value={company}
                 onChange={(event) => setCompany(event.target.value)}
                 placeholder="Your company"
+                disabled={submitting}
               />
             </label>
             <label className="quote-field" htmlFor="quote-email">
@@ -164,6 +222,7 @@ function QuoteForm({
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="you@company.com"
+                disabled={submitting}
               />
             </label>
           </div>
@@ -179,22 +238,19 @@ function QuoteForm({
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
                 placeholder="Include country code"
+                disabled={submitting}
               />
             </label>
             <label className="quote-field" htmlFor="quote-timeline">
               Project timeline
-              <select
+              <Select
                 id="quote-timeline"
+                name="timeline"
                 value={timeline}
-                onChange={(event) => setTimeline(event.target.value)}
-                className="h-11 rounded-xl border border-slate-200 px-3 text-sm"
-              >
-                <option>Planning / exploring options</option>
-                <option>Within 1–2 weeks</option>
-                <option>Within a month</option>
-                <option>Within 3 months</option>
-                <option>Tender / BOQ pricing</option>
-              </select>
+                onValueChange={setTimeline}
+                options={PROJECT_TIMELINES}
+                disabled={submitting}
+              />
             </label>
           </div>
           <label className="quote-field" htmlFor="quote-scope">
@@ -206,66 +262,84 @@ function QuoteForm({
               value={scope}
               onChange={(event) => setScope(event.target.value)}
               placeholder="Tell us about your sites, hardware, workloads or support requirements."
+              disabled={submitting}
             />
           </label>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Have a spreadsheet or tender document? Attach it in your email app
-            after opening the draft.
-          </p>
-          <Button
-            type="submit"
-            variant="brand"
-            disabled={!services.length || !company.trim()}
-            className="w-full"
+          <div
+            className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+            aria-hidden="true"
           >
-            Prepare email draft <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button>
-        </form>
-      ) : (
-        <div className="space-y-4">
-          <Textarea
-            aria-label="Prepared project enquiry"
-            value={body}
-            readOnly
-            rows={9}
-            className="text-xs bg-slate-50"
-          />
-          <Button asChild variant="brand" className="w-full">
-            <a href={mailto}>
-              <Mail className="mr-2 h-4 w-4" />
-              Open email app
-            </a>
-          </Button>
-          <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" onClick={copy}>
-              <Copy className="mr-2 h-4 w-4" />
-              Copy request
-            </Button>
-            <Button variant="outline" onClick={download}>
-              <Download className="mr-2 h-4 w-4" />
-              Download
-            </Button>
+            <label htmlFor="quote-website">
+              Website
+              <Input
+                id="quote-website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(event) => setWebsite(event.target.value)}
+              />
+            </label>
           </div>
-          <p role="status" className="text-xs text-blue-700">
-            {copyStatus && (
-              <>
-                <Check className="inline h-3 w-3 mr-1" />
-                {copyStatus}
-              </>
-            )}
-          </p>
           <p className="text-xs text-slate-500 leading-relaxed">
-            No email app configured? Copy or download your request and send it
-            to{" "}
-            <a className="underline" href="mailto:rfq@yasabetech.com">
-              rfq@yasabetech.com
+            Have a BOQ or tender document? Mention it here and share the file
+            with{" "}
+            <a
+              href={`mailto:${SALES_EMAIL}`}
+              className="underline underline-offset-2"
+            >
+              {SALES_EMAIL}
             </a>
             .
           </p>
-          <button className="text-link" onClick={() => setReady(false)}>
-            Edit project details
-          </button>
-        </div>
+          {siteKey && (
+            <EnquiryVerification
+              key={verificationVersion}
+              siteKey={siteKey}
+              onToken={setToken}
+            />
+          )}
+          {error && (
+            <p
+              role="alert"
+              className="rounded-lg border border-red-100 bg-red-50 p-3 text-xs leading-relaxed text-red-700"
+            >
+              {error}
+            </p>
+          )}
+          <Button
+            type="submit"
+            variant="brand"
+            disabled={
+              !services.length ||
+              !company.trim() ||
+              submitting ||
+              (Boolean(siteKey) && !token)
+            }
+            className="w-full"
+          >
+            {submitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending enquiry…
+              </>
+            ) : (
+              <>
+                Send enquiry <ArrowUpRight className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
+          <p className="text-center text-xs text-slate-500">
+            <Mail className="mr-1 inline h-3 w-3" />
+            Prefer email?{" "}
+            <a
+              className="underline underline-offset-2"
+              href={`mailto:${SALES_EMAIL}`}
+            >
+              {SALES_EMAIL}
+            </a>
+          </p>
+        </form>
       )}
     </>
   );

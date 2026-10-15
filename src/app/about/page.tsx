@@ -103,10 +103,10 @@ export default function AboutPage() {
             </p>
           </div>
           <Image
-            src="/hero-graphic.webp"
-            alt="Illustration of network and AI infrastructure designed as a connected system"
+            src="/images/team-collaboration.webp"
+            alt="Illustrative scene of technology consultants reviewing a project plan together"
             width={1200}
-            height={896}
+            height={900}
             sizes="(max-width: 900px) 100vw, 50vw"
             className="about-image"
           />
@@ -180,8 +180,8 @@ export default function AboutPage() {
             >
               Discuss your project <ArrowUpRight className="ml-3 h-4 w-4" />
             </Button>
-            <a href="mailto:rfq@yasabetech.com">
-              rfq@yasabetech.com <ArrowUpRight className="h-4 w-4" />
+            <a href="mailto:sales@yasabetech.com">
+              sales@yasabetech.com <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
         </div>

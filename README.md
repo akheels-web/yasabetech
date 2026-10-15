@@ -1,6 +1,6 @@
 # Yasabe Technologies
 
-A responsive Next.js marketing site for enterprise networking, private AI and managed IT. The site exports to static HTML, CSS and JavaScript for Cloudflare Pages; it needs no application server or Cloudflare bindings.
+A responsive Next.js marketing site for enterprise networking, private AI and managed IT. The site exports to static HTML, CSS and JavaScript for Cloudflare Pages; a Pages Function handles direct enquiry delivery to Zoho Mail.
 
 ## Local development
 
@@ -26,18 +26,20 @@ The build writes `out/`. The dependency-free preview serves that exact export at
 
 ## Cloudflare Pages configuration
 
+Follow the [Cloudflare Free hosting guide](docs/cloudflare-hosting.md) for the full GitHub deployment, custom domain, email setup, verification and rollback steps.
+
 All preparation in this repository is local code. No Cloudflare resources, DNS records or deployments have been created or changed.
 
 When you are ready to create or configure a Pages project yourself:
 
-| Setting                | Value                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------- |
-| Framework preset       | Next.js (Static HTML Export)                                                            |
-| Build command          | `npm run build`                                                                         |
-| Build output directory | `out`                                                                                   |
+| Setting                | Value                                                          |
+| ---------------------- | -------------------------------------------------------------- |
+| Framework preset       | Next.js (Static HTML Export)                                   |
+| Build command          | `npm run build`                                                |
+| Build output directory | `out`                                                          |
 | Root directory         | Leave blank (this Git repository has package.json at its root) |
-| Node version           | `22` (also pinned in `.node-version`)                                                   |
-| Public build variable  | `NEXT_PUBLIC_SITE_URL=https://your-production-domain`                                   |
+| Node version           | `22` (also pinned in `.node-version`)                          |
+| Public build variable  | `NEXT_PUBLIC_SITE_URL=https://your-production-domain`          |
 
 `wrangler.jsonc` declares the local project name and Pages output directory. Change the name if your eventual Pages project uses a different name. No credentials belong in the file. Wrangler is not required to build or preview this site.
 
@@ -49,14 +51,17 @@ Official deployment reference: [Cloudflare Pages static Next.js guide](https://d
 
 ## Project enquiries
 
-The enquiry form prepares a request for `rfq@yasabetech.com`. Visitors review it, then send it through their own email app. Copy and text-download fallbacks are available. BOQ documents can be attached in the email app. The site does not claim to submit, upload or deliver requests, and stores no enquiry data.
+The form sends directly to `sales@yasabetech.com` through `/api/enquiry`, a Cloudflare Pages Function backed by Zoho transactional email. The visitor is set as Reply-To. Turnstile verification, server-side validation and a fixed recipient protect the endpoint.
 
-A backend or external form service would be needed for automatic delivery. That is intentionally outside this static-site setup.
+Follow [the email setup guide](docs/email-setup.md) to add the private Zoho credentials and Turnstile keys. The frontend stays static; direct email requires the Pages Function and runtime settings. The UI does not report success until the provider accepts the request. The static-only preview cannot send mail.
+
+Use `npm test` for delivery-handler tests and `npm run check:functions` to validate the Cloudflare bundle. `npm run preview:functions` runs a full local Pages preview after building. Tests use mocks and send no real email.
 
 ## Content and assets
 
 - Service catalog content lives in `src/lib/solutions.ts`; shared categories live in `src/lib/solution-categories.ts`.
 - Reference research and the expanded service mapping are documented in `docs/services-research.md`.
 - The project scope builder carries the selected service, scale, support and suggested architecture into the enquiry draft.
-- Existing artwork and branding are preserved, with smaller WebP delivery assets in `public/`.
+- Editorial-style photographic imagery lives in `public/images/`; the original networking illustrations and unused starter images have been removed. Brand logos and icons are preserved.
+- Image provenance, generation prompts and usage are documented in `docs/image-assets.md`.
 - Architecture suggestions and deployment times are illustrative and subject to project review. Business contact information and service capabilities should be checked by the site owner before publication.
