@@ -59,9 +59,10 @@ Use `npm test` for delivery-handler tests and `npm run check:functions` to valid
 
 ## Content and assets
 
-- Service catalog content lives in `src/lib/solutions.ts`; shared categories live in `src/lib/solution-categories.ts`.
+- The compact solutions overview lives in `src/lib/solution-areas.ts`; shared enquiry categories live in `src/lib/solution-categories.ts`. The earlier detailed catalogue in `src/lib/solutions.ts` is retained as a reference and is not rendered on the page.
 - Reference research and the expanded service mapping are documented in `docs/services-research.md`.
-- The project scope builder carries the selected service, scale, support and suggested architecture into the enquiry draft.
+- Solution cards open optional details and carry the selected area into the enquiry form. Regional research and the compact layout decisions are documented in `docs/solutions-refresh.md`.
 - Editorial-style photographic imagery lives in `public/images/`; the original networking illustrations and unused starter images have been removed. Brand logos and icons are preserved.
 - Image provenance, generation prompts and usage are documented in `docs/image-assets.md`.
+- Homepage technology logos are local SVG assets under `public/brands/`; their sources are recorded in `docs/technology-logo-sources.json`. The single-row strip automatically scrolls left without manual controls.
 - Architecture suggestions and deployment times are illustrative and subject to project review. Business contact information and service capabilities should be checked by the site owner before publication.

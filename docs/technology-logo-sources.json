@@ -1,0 +1,174 @@
+[
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cisco.svg",
+    "file": "cisco.svg",
+    "name": "Cisco",
+    "color": "#1BA0D7",
+    "brandSource": "https://www.cisco.com"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/dell.svg",
+    "file": "dell.svg",
+    "name": "Dell",
+    "color": "#007DB8",
+    "brandSource": "https://www.dell.com"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/fortinet.svg",
+    "file": "fortinet.svg",
+    "name": "Fortinet",
+    "color": "#EE3124",
+    "brandSource": "https://www.fortinet.com"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/hp.svg",
+    "file": "hp.svg",
+    "name": "HP",
+    "color": "#0096D6",
+    "brandSource": "https://brandcentral.hp.com/us/en/elements/hp-logo.html"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/junipernetworks.svg",
+    "file": "junipernetworks.svg",
+    "name": "Juniper Networks",
+    "color": "#84B135",
+    "brandSource": "https://www.juniper.net/us/en/company/press-center/images/image-library/logos/"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/lenovo.svg",
+    "file": "lenovo.svg",
+    "name": "Lenovo",
+    "color": "#E2231A",
+    "brandSource": "https://news.lenovo.com/press-kits/"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/paloaltonetworks.svg",
+    "file": "paloaltonetworks.svg",
+    "name": "Palo Alto Networks",
+    "color": "#F04E23",
+    "brandSource": "https://www.paloaltonetworks.com"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/redhat.svg",
+    "file": "redhat.svg",
+    "name": "Red Hat",
+    "color": "#EE0000",
+    "brandSource": "https://www.redhat.com/en/about/brand/new-brand/details"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ubiquiti.svg",
+    "file": "ubiquiti.svg",
+    "name": "Ubiquiti",
+    "color": "#0559C9",
+    "brandSource": "https://www.ui.com"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/veeam.svg",
+    "file": "veeam.svg",
+    "name": "Veeam",
+    "color": "#00B336",
+    "brandSource": "https://www.veeam.com/newsroom/veeam-graphics.html"
+  },
+  {
+    "asset": "https://svgl.app/library/microsoft.svg",
+    "file": "microsoft.svg",
+    "name": "Microsoft",
+    "brandSource": "https://www.microsoft.com/"
+  },
+  {
+    "asset": "https://svgl.app/library/nvidia-wordmark-light.svg",
+    "file": "nvidia.svg",
+    "name": "NVIDIA",
+    "brandSource": "https://www.nvidia.com"
+  },
+  {
+    "asset": "https://svgl.app/library/zoom.svg",
+    "file": "zoom.svg",
+    "name": "Zoom",
+    "brandSource": "https://zoom.us/"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/amd.svg",
+    "file": "amd.svg",
+    "color": "#ED1C24",
+    "brandSource": "https://www.amd.com",
+    "name": "AMD"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/citrix.svg",
+    "file": "citrix.svg",
+    "color": "#452170",
+    "brandSource": "https://brand.citrix.com",
+    "name": "Citrix"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/intel.svg",
+    "file": "intel.svg",
+    "color": "#0071C5",
+    "brandSource": "https://www.intel.com/content/www/us/en/newsroom/resources/press-kits-intel-overview.html",
+    "name": "Intel"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/netapp.svg",
+    "file": "netapp.svg",
+    "color": "#0067C5",
+    "brandSource": "https://www.netapp.com",
+    "name": "NetApp"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nutanix.svg",
+    "file": "nutanix.svg",
+    "color": "#024DA1",
+    "brandSource": "https://www.nutanix.com/content/dam/nutanix/en/cmn/documents/nutanix-brandbook.pdf",
+    "name": "Nutanix"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/poly.svg",
+    "file": "poly.svg",
+    "color": "#EB3C00",
+    "brandSource": "https://www.poly.com",
+    "name": "Poly"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/qnap.svg",
+    "file": "qnap.svg",
+    "color": "#0C2E82",
+    "brandSource": "https://marketing.qnap.com/resource/qnap-logo-k100",
+    "name": "QNAP"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/schneiderelectric.svg",
+    "file": "schneiderelectric.svg",
+    "color": "#3DCD58",
+    "brandSource": "https://www.se.com/us/en/assets/739/media/202250/SE_logo-LIO-white_header.svg",
+    "name": "Schneider Electric"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/seagate.svg",
+    "file": "seagate.svg",
+    "color": "#6EBE49",
+    "brandSource": "https://branding.seagate.com/productpage/3fc51aba-c35a-4eff-a833-a258b0440bd2",
+    "name": "Seagate"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/supermicro.svg",
+    "file": "supermicro.svg",
+    "color": "#151F6D",
+    "brandSource": "https://www.supermicro.com/manuals/supermicro_logo_guidelines.pdf",
+    "name": "Supermicro"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tplink.svg",
+    "file": "tplink.svg",
+    "color": "#4ACBD6",
+    "brandSource": "https://www.tp-link.com",
+    "name": "TP-Link"
+  },
+  {
+    "asset": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/vmware.svg",
+    "file": "vmware.svg",
+    "color": "#607078",
+    "brandSource": "https://myvmware.workspaceair.com",
+    "name": "VMware"
+  }
+]

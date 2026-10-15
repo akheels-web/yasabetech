@@ -247,7 +247,7 @@ export default function HomePage() {
             </h2>
           </div>
           <Link href="/solutions#calculator" className="text-link">
-            Build your project scope <ArrowUpRight className="h-4 w-4" />
+            Plan your next project <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
         <div className="needs-grid">

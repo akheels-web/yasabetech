@@ -10,7 +10,7 @@ The five WebP files below are the production assets. They are stored locally in 
 | `public/images/connected-workplace.webp`   | Enterprise networking service card; 900 × 675 |
 | `public/images/ai-innovation.webp`         | Private AI service card; 900 × 675            |
 | `public/images/technology-operations.webp` | Managed IT service card; 900 × 675            |
-| `public/images/team-collaboration.webp`    | About page; 1200 × 900                        |
+| `public/images/team-collaboration.webp`    | About page and solutions hero; 1200 × 900     |
 
 The previous networking/server illustrations and unused starter SVG images were deleted from the current project. Logo and favicon assets remain part of the existing brand identity. Layout and card geometry are preserved; photo color is displayed normally rather than with the former illustration blending mode.
 

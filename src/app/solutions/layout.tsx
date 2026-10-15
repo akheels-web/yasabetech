@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Enterprise Solutions",
+  title: "IT Solutions in Oman & Saudi Arabia",
   description:
-    "Explore enterprise networking, AI and IoT, cloud, cybersecurity, telecom, AV, communications and digital platforms. Build your project scope with Yasabe.",
+    "Explore IT solutions for businesses in Oman and Saudi Arabia: networking, cloud, cybersecurity, private AI, workplace systems and technology sourcing.",
   alternates: { canonical: "/solutions/" },
   openGraph: {
-    title: "Enterprise Solutions | Yasabe Technologies",
+    title: "IT Solutions in Oman & Saudi Arabia | Yasabe Technologies",
+    description: "Networking, cloud, cybersecurity and workplace technology, from project planning to ongoing support.",
     url: "/solutions/",
   },
 };

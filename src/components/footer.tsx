@@ -27,7 +27,7 @@ export function Footer() {
             <Link href="/solutions#networking">Enterprise networking</Link>
             <Link href="/solutions#ai">Private AI & compute</Link>
             <Link href="/solutions#managed-it">Managed IT & security</Link>
-            <Link href="/solutions#calculator">Project scope builder</Link>
+            <Link href="/solutions#calculator">Project planning</Link>
           </div>
           <div>
             <h2>Discover</h2>
