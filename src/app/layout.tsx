@@ -1,31 +1,36 @@
-import type { Metadata, Viewport } from "next"
-import { Plus_Jakarta_Sans, Outfit } from "next/font/google"
-import "./globals.css"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { siteUrl } from "@/lib/site";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
-})
+});
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
-})
+});
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
-}
+};
 
 export const metadata: Metadata = {
-  title: "Yasabe Technologies | Enterprise Networking, AI Services & Managed IT",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Yasabe Technologies | Built for what comes next",
+    template: "%s | Yasabe Technologies",
+  },
   description:
-    "Yasabe Technologies provides authorized enterprise networking, sovereign private AI infrastructure, and 24/7 managed IT services with guaranteed SLA performance. Connect. Secure. Empower.",
+    "Enterprise networking, private AI infrastructure and managed IT. Yasabe Technologies brings architecture, hardware sourcing and ongoing support together. Connect. Secure. Empower.",
   keywords: [
     "Enterprise Networking",
     "AI Services",
@@ -34,19 +39,43 @@ export const metadata: Metadata = {
     "SD-WAN",
     "Wi-Fi 7",
     "GPU Compute",
-    "Cisco Partner",
-    "NVIDIA Partner",
+    "Private AI Infrastructure",
+    "Enterprise IT Support",
   ],
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.webp",
+    apple: "/apple-touch-icon.png",
   },
-}
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Yasabe Technologies",
+    title: "Yasabe Technologies | Built for what comes next",
+    description:
+      "Enterprise networks, private AI and managed IT. One connected approach from architecture to operations.",
+    url: "/",
+    images: [
+      {
+        url: "/hero-graphic.webp",
+        width: 1100,
+        height: 821,
+        alt: "Connected enterprise infrastructure",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yasabe Technologies",
+    description:
+      "Built for what comes next. Enterprise networking, private AI and managed IT.",
+    images: ["/hero-graphic.webp"],
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html
@@ -55,10 +84,15 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-sky-500/20 selection:text-sky-900">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
-  )
+  );
 }

@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yasabe Technologies
 
-## Getting Started
+A responsive Next.js marketing site for enterprise networking, private AI and managed IT. The site exports to static HTML, CSS and JavaScript for Cloudflare Pages; it needs no application server or Cloudflare bindings.
 
-First, run the development server:
+## Local development
 
-```bash
+Use Node.js 22 or later. The repository includes a Node version pin for Cloudflare builds.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The development site is available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verify and preview the production site
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run lint
+npm run build
+npm run typecheck
+npm run preview
+```
 
-## Learn More
+The build writes `out/`. The dependency-free preview serves that exact export at http://localhost:4173. `npm start` also previews the export; `next start` does not support static exports. Stop the preview with Ctrl+C. `PORT` can override the preview port.
 
-To learn more about Next.js, take a look at the following resources:
+## Cloudflare Pages configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All preparation in this repository is local code. No Cloudflare resources, DNS records or deployments have been created or changed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+When you are ready to create or configure a Pages project yourself:
 
-## Deploy on Vercel
+| Setting                | Value                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Framework preset       | Next.js (Static HTML Export)                                                            |
+| Build command          | `npm run build`                                                                         |
+| Build output directory | `out`                                                                                   |
+| Root directory         | Leave blank (this Git repository has package.json at its root) |
+| Node version           | `22` (also pinned in `.node-version`)                                                   |
+| Public build variable  | `NEXT_PUBLIC_SITE_URL=https://your-production-domain`                                   |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`wrangler.jsonc` declares the local project name and Pages output directory. Change the name if your eventual Pages project uses a different name. No credentials belong in the file. Wrangler is not required to build or preview this site.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set `NEXT_PUBLIC_SITE_URL` before building for your production domain; it defaults to `https://yasabetech.com`. This controls canonical links, the sitemap and social metadata. See `.env.example`. Public variables are included in the build and must never contain secrets.
+
+`public/_headers` is copied into `out/` for Pages security and asset caching headers. `robots.txt`, `sitemap.xml`, individual route HTML and a real `404.html` are generated during the build. No SPA catch-all redirect is needed.
+
+Official deployment reference: [Cloudflare Pages static Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/).
+
+## Project enquiries
+
+The enquiry form prepares a request for `rfq@yasabetech.com`. Visitors review it, then send it through their own email app. Copy and text-download fallbacks are available. BOQ documents can be attached in the email app. The site does not claim to submit, upload or deliver requests, and stores no enquiry data.
+
+A backend or external form service would be needed for automatic delivery. That is intentionally outside this static-site setup.
+
+## Content and assets
+
+- Service catalog content lives in `src/lib/solutions.ts`; shared categories live in `src/lib/solution-categories.ts`.
+- Reference research and the expanded service mapping are documented in `docs/services-research.md`.
+- The project scope builder carries the selected service, scale, support and suggested architecture into the enquiry draft.
+- Existing artwork and branding are preserved, with smaller WebP delivery assets in `public/`.
+- Architecture suggestions and deployment times are illustrative and subject to project review. Business contact information and service capabilities should be checked by the site owner before publication.

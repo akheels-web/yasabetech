@@ -5,8 +5,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/preview.mjs",
+    "preview": "node scripts/preview.mjs",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.21",

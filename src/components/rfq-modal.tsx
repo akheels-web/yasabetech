@@ -1,272 +1,272 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogHeader, 
-  DialogTitle 
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Badge } from "@/components/ui/badge"
-import { 
-  CheckCircle2, 
-  Building2, 
-  Mail, 
-  Phone, 
-  UploadCloud, 
-  Cpu, 
-  Network, 
-  Server, 
-  Send 
-} from "lucide-react"
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { solutionCategories } from "@/lib/solution-categories";
 
+const options = [
+  ...solutionCategories.map((category) => ({
+    id: category.id,
+    label: category.enquiryLabel,
+  })),
+  { id: "hardware-boq", label: "Hardware sourcing / BOQ" },
+];
 interface RFQModalProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  initialCategory?: string
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  initialCategory?: string;
+  initialScope?: string;
 }
 
-export function RFQModal({ open, onOpenChange, initialCategory = "networking" }: RFQModalProps) {
-  const [selectedServices, setSelectedServices] = React.useState<string[]>([
-    initialCategory,
-  ])
-  const [company, setCompany] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [phone, setPhone] = React.useState("")
-  const [timeline, setTimeline] = React.useState("immediate")
-  const [scopeDetails, setScopeDetails] = React.useState("")
-  const [isSubmitted, setIsSubmitted] = React.useState(false)
-  const [rfqReference, setRfqReference] = React.useState("")
-
-  const resetForm = () => {
-    setSelectedServices(initialCategory ? [initialCategory] : [])
-    setIsSubmitted(false)
-    setRfqReference("")
-    setCompany("")
-    setEmail("")
-    setPhone("")
-    setScopeDetails("")
-  }
-
-  const handleOpenChange = (nextOpen: boolean) => {
-    if (!nextOpen) resetForm()
-    onOpenChange(nextOpen)
-  }
-
-  const serviceOptions = [
-    { id: "networking", label: "Enterprise Networking (SD-WAN / Wi-Fi 7)", icon: Network },
-    { id: "ai", label: "AI Infrastructure & Sovereign LLMs", icon: Cpu },
-    { id: "managed-it", label: "Managed IT & 24/7 NOC/SOC Support", icon: Server },
-    { id: "hardware-boq", label: "Direct Hardware Supply & BOQ Fulfillment", icon: Building2 },
-  ]
-
-  const toggleService = (id: string) => {
-    if (selectedServices.includes(id)) {
-      setSelectedServices(selectedServices.filter(s => s !== id))
-    } else {
-      setSelectedServices([...selectedServices, id])
-    }
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const generatedRef = "RFQ-YASABE-" + Math.floor(100000 + Math.random() * 900000)
-    setRfqReference(generatedRef)
-    setIsSubmitted(true)
-  }
-
-  const handleReset = () => {
-    resetForm()
-    onOpenChange(false)
-  }
-
+export function RFQModal({
+  open,
+  onOpenChange,
+  initialCategory = "networking",
+  initialScope = "",
+}: RFQModalProps) {
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-xl bg-white border border-slate-200 text-slate-900 shadow-2xl">
-        {!isSubmitted ? (
-          <>
-            <DialogHeader>
-              <div className="flex items-center gap-2 mb-1">
-                <Badge variant="default" className="text-[11px] bg-sky-50 text-sky-700 border-sky-200 font-bold">
-                  Direct B2B Procurement & Engineering
-                </Badge>
-              </div>
-              <DialogTitle className="text-2xl font-bold text-slate-900 tracking-tight font-heading">
-                Request an RFQ & Solution Assessment
-              </DialogTitle>
-              <DialogDescription className="text-slate-600 text-sm">
-                Submit your Bill of Quantities (BOQ) or enterprise requirements. Our solution architects will return an authorized proposal within 4 business hours.
-              </DialogDescription>
-            </DialogHeader>
-
-            <form onSubmit={handleSubmit} className="space-y-4 mt-2">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2 font-heading">
-                  Select Required Solutions (Multiple Allowed)
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {serviceOptions.map((opt) => {
-                    const Icon = opt.icon
-                    const isSelected = selectedServices.includes(opt.id)
-                    return (
-                      <button
-                        type="button"
-                        key={opt.id}
-                        onClick={() => toggleService(opt.id)}
-                        className={`flex items-center gap-2.5 p-3 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-sky-50 border-sky-500 text-sky-900 shadow-xs"
-                            : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
-                        }`}
-                      >
-                        <Icon className={`h-4 w-4 shrink-0 ${isSelected ? "text-sky-600" : "text-slate-400"}`} />
-                        <span>{opt.label}</span>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Company / Organization Name *
-                  </label>
-                  <div className="relative">
-                    <Building2 className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                    <Input
-                      required
-                      placeholder="e.g. Enterprise Client / Gov Entity"
-                      value={company}
-                      onChange={(e) => setCompany(e.target.value)}
-                      className="pl-9 bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Official Work Email *
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                    <Input
-                      type="email"
-                      required
-                      placeholder="procurement@company.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-9 bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Direct Phone / WhatsApp
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                    <Input
-                      type="tel"
-                      placeholder="+966 50 123 4567"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="pl-9 bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Target Deployment Timeline
-                  </label>
-                  <select
-                    value={timeline}
-                    onChange={(e) => setTimeline(e.target.value)}
-                    className="flex h-11 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium"
-                  >
-                    <option value="immediate">Urgent (Within 1-2 Weeks)</option>
-                    <option value="1month">Standard (Within 30 Days)</option>
-                    <option value="quarter">Upcoming Quarter (Q3/Q4)</option>
-                    <option value="boq-pricing">Tender / BOQ Pricing Only</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Project Scope, Hardware Quantities or BOQ Details
-                </label>
-                <Textarea
-                  placeholder="Paste your BOQ list, equipment part numbers (Cisco, Dell, NVIDIA, Fortinet), site count, or AI workload specifications..."
-                  rows={3}
-                  value={scopeDetails}
-                  onChange={(e) => setScopeDetails(e.target.value)}
-                  className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 text-xs"
-                />
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs text-slate-600">
-                <span className="flex items-center gap-1.5 font-medium">
-                  <UploadCloud className="h-4 w-4 text-sky-600" />
-                  Have an Excel or PDF BOQ?
-                </span>
-                <span className="text-[11px] text-sky-700 font-bold">
-                  Direct upload enabled upon submission
-                </span>
-              </div>
-
-              <div className="pt-2 flex items-center justify-end gap-3">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={() => onOpenChange(false)}
-                  className="text-slate-600 hover:text-slate-900"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  variant="brand"
-                  className="font-bold px-6 shadow-md"
-                >
-                  <Send className="mr-2 h-4 w-4" />
-                  Submit RFQ Request
-                </Button>
-              </div>
-            </form>
-          </>
-        ) : (
-          <div className="py-8 text-center space-y-4">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-xs">
-              <CheckCircle2 className="h-8 w-8 animate-bounce" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 font-heading">RFQ Successfully Dispatched</h3>
-              <p className="text-sm text-slate-600 mt-1 max-w-md mx-auto">
-                Thank you for consulting Yasabe Technologies. Your request has been assigned to our Senior Systems & Network Engineering Desk.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 max-w-sm mx-auto text-left space-y-1 shadow-xs">
-              <div className="text-xs text-slate-500 uppercase font-bold">Reference ID</div>
-              <div className="text-base font-mono font-bold text-sky-700">{rfqReference}</div>
-              <div className="text-xs text-slate-600 font-medium">
-                Direct Dispatch: <span className="text-slate-900">rfq@yasabetech.com</span>
-              </div>
-            </div>
-            <div className="pt-2">
-              <Button onClick={handleReset} variant="brand" className="font-bold px-7">
-                Done & Return
-              </Button>
-            </div>
-          </div>
-        )}
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="w-[calc(100%-24px)] rounded-2xl sm:max-w-xl">
+        <QuoteForm
+          key={`${initialCategory}-${initialScope}`}
+          initialCategory={initialCategory}
+          initialScope={initialScope}
+        />
       </DialogContent>
     </Dialog>
-  )
+  );
+}
+
+function QuoteForm({
+  initialCategory,
+  initialScope,
+}: {
+  initialCategory: string;
+  initialScope: string;
+}) {
+  const [services, setServices] = useState([initialCategory]);
+  const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [timeline, setTimeline] = useState("Planning / exploring options");
+  const [scope, setScope] = useState(initialScope);
+  const [ready, setReady] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
+  const serviceNames = options
+    .filter((option) => services.includes(option.id))
+    .map((option) => option.label)
+    .join(", ");
+  const subject = `Project enquiry — ${company}`;
+  const body = `Hello Yasabe team,\n\nI would like to discuss the following project.\n\nCompany: ${company}\nWork email: ${email}\nPhone: ${phone || "Not provided"}\nServices: ${serviceNames}\nTimeline: ${timeline}\n\nProject details:\n${scope || "To be discussed"}\n\nPlease contact me to review the scope and quotation.`;
+  const mailto = `mailto:rfq@yasabetech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `To: rfq@yasabetech.com\nSubject: ${subject}\n\n${body}`,
+      );
+      setCopyStatus("Copied to clipboard");
+    } catch {
+      setCopyStatus("Select and copy the request text below.");
+    }
+  };
+  const download = () => {
+    const url = URL.createObjectURL(
+      new Blob([`To: rfq@yasabetech.com\nSubject: ${subject}\n\n${body}`], {
+        type: "text/plain;charset=utf-8",
+      }),
+    );
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "yasabe-project-enquiry.txt";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  return (
+    <>
+      <DialogHeader className="pr-6 text-left">
+        <p className="text-xs font-semibold text-blue-700 mb-2">
+          Let’s build something that works.
+        </p>
+        <DialogTitle className="text-3xl font-medium leading-tight">
+          {ready ? "Your email draft is ready." : "Tell us about your project."}
+        </DialogTitle>
+        <DialogDescription className="pt-2 leading-relaxed">
+          {ready
+            ? "Review your request, then open your email app and send it to our team. Your request has not been sent yet."
+            : "Prepare an enquiry for rfq@yasabetech.com. You’ll review and send it from your email app; no details are stored on this site."}
+        </DialogDescription>
+      </DialogHeader>
+      {!ready ? (
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            setReady(true);
+          }}
+          className="space-y-5 mt-1"
+        >
+          <fieldset>
+            <legend className="text-xs font-semibold mb-2">
+              What can we help with? Choose at least one.
+            </legend>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {options.map((option) => (
+                <label className="quote-service" key={option.id}>
+                  <input
+                    type="checkbox"
+                    checked={services.includes(option.id)}
+                    onChange={() =>
+                      setServices((current) =>
+                        current.includes(option.id)
+                          ? current.filter((id) => id !== option.id)
+                          : [...current, option.id],
+                      )
+                    }
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <label className="quote-field" htmlFor="quote-company">
+              Company *
+              <Input
+                id="quote-company"
+                name="organization"
+                autoComplete="organization"
+                required
+                maxLength={120}
+                value={company}
+                onChange={(event) => setCompany(event.target.value)}
+                placeholder="Your company"
+              />
+            </label>
+            <label className="quote-field" htmlFor="quote-email">
+              Work email *
+              <Input
+                id="quote-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                maxLength={180}
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@company.com"
+              />
+            </label>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <label className="quote-field" htmlFor="quote-phone">
+              Phone (optional)
+              <Input
+                id="quote-phone"
+                name="tel"
+                type="tel"
+                autoComplete="tel"
+                maxLength={40}
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                placeholder="Include country code"
+              />
+            </label>
+            <label className="quote-field" htmlFor="quote-timeline">
+              Project timeline
+              <select
+                id="quote-timeline"
+                value={timeline}
+                onChange={(event) => setTimeline(event.target.value)}
+                className="h-11 rounded-xl border border-slate-200 px-3 text-sm"
+              >
+                <option>Planning / exploring options</option>
+                <option>Within 1–2 weeks</option>
+                <option>Within a month</option>
+                <option>Within 3 months</option>
+                <option>Tender / BOQ pricing</option>
+              </select>
+            </label>
+          </div>
+          <label className="quote-field" htmlFor="quote-scope">
+            Project details
+            <Textarea
+              id="quote-scope"
+              rows={4}
+              maxLength={2000}
+              value={scope}
+              onChange={(event) => setScope(event.target.value)}
+              placeholder="Tell us about your sites, hardware, workloads or support requirements."
+            />
+          </label>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Have a spreadsheet or tender document? Attach it in your email app
+            after opening the draft.
+          </p>
+          <Button
+            type="submit"
+            variant="brand"
+            disabled={!services.length || !company.trim()}
+            className="w-full"
+          >
+            Prepare email draft <ArrowUpRight className="ml-2 h-4 w-4" />
+          </Button>
+        </form>
+      ) : (
+        <div className="space-y-4">
+          <Textarea
+            aria-label="Prepared project enquiry"
+            value={body}
+            readOnly
+            rows={9}
+            className="text-xs bg-slate-50"
+          />
+          <Button asChild variant="brand" className="w-full">
+            <a href={mailto}>
+              <Mail className="mr-2 h-4 w-4" />
+              Open email app
+            </a>
+          </Button>
+          <div className="grid grid-cols-2 gap-3">
+            <Button variant="outline" onClick={copy}>
+              <Copy className="mr-2 h-4 w-4" />
+              Copy request
+            </Button>
+            <Button variant="outline" onClick={download}>
+              <Download className="mr-2 h-4 w-4" />
+              Download
+            </Button>
+          </div>
+          <p role="status" className="text-xs text-blue-700">
+            {copyStatus && (
+              <>
+                <Check className="inline h-3 w-3 mr-1" />
+                {copyStatus}
+              </>
+            )}
+          </p>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            No email app configured? Copy or download your request and send it
+            to{" "}
+            <a className="underline" href="mailto:rfq@yasabetech.com">
+              rfq@yasabetech.com
+            </a>
+            .
+          </p>
+          <button className="text-link" onClick={() => setReady(false)}>
+            Edit project details
+          </button>
+        </div>
+      )}
+    </>
+  );
 }

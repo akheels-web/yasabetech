@@ -1,0 +1,137 @@
+▲ Next.js 16.4.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+✓ Ready in 560ms
+✓ Running next.config.ts took 42ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+ GET / 200 in 2.2s (next.js: 1223ms, application-code: 976ms)
+ GET / 200 in 126ms (next.js: 6ms, application-code: 120ms)
+ GET / 200 in 150ms (next.js: 3ms, application-code: 147ms)
+ GET / 200 in 222ms (next.js: 4ms, application-code: 218ms)
+✓ Compiled in 455ms
+[browser] Uncaught ReferenceError: TopologyDiagram is not defined
+    at HomePage (src/app/page.tsx:263:20)
+    at Set.forEach (<anonymous>)
+  261 |                 {/* diagram body */}
+  262 |                 <div className="p-5 sm:p-6">
+> 263 |                   <TopologyDiagram />
+      |                    ^
+  264 |                 </div>
+  265 |
+  266 |                 {/* diagram footer / caption */}
+✓ Compiled in 135ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 972ms (next.js: 30ms, application-code: 942ms)
+ GET / 200 in 203ms (next.js: 4ms, application-code: 199ms)
+✓ Compiled in 89ms
+[browser] ./src/app/page.tsx:201:10
+Error: the name `TopologyDiagram` is defined multiple times
+  199 | }
+  200 | import { Button } from "@/components/ui/button"
+> 201 | import { TopologyDiagram } from "@/components/topology-diagram"
+      |          ^^^^^^^^^^^^^^^
+  202 | import { Badge } from "@/components/ui/badge"
+  203 | import { PartnersBanner } from "@/components/partners-banner"
+  204 | import { StatsCounter } from "@/components/stats-counter"
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/app/page.tsx:201:10
+Error: the name `TopologyDiagram` is defined multiple times
+  199 | }
+  200 | import { Button } from "@/components/ui/button"
+> 201 | import { TopologyDiagram } from "@/components/topology-diagram"
+      |          ^^^^^^^^^^^^^^^
+  202 | import { Badge } from "@/components/ui/badge"
+  203 | import { PartnersBanner } from "@/components/partners-banner"
+  204 | import { StatsCounter } from "@/components/stats-counter"
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component] 
+✓ Compiled in 72ms
+ GET / 200 in 110ms (next.js: 7ms, application-code: 102ms)
+ GET / 200 in 104ms (next.js: 6ms, application-code: 98ms)
+ GET / 200 in 211ms (next.js: 6ms, application-code: 205ms)
+[browser] ./src/app/page.tsx:201:10
+Error: the name `TopologyDiagram` is defined multiple times
+  199 | }
+  200 | import { Button } from "@/components/ui/button"
+> 201 | import { TopologyDiagram } from "@/components/topology-diagram"
+      |          ^^^^^^^^^^^^^^^
+  202 | import { Badge } from "@/components/ui/badge"
+  203 | import { PartnersBanner } from "@/components/partners-banner"
+  204 | import { StatsCounter } from "@/components/stats-counter"
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/app/page.tsx:201:10
+Error: the name `TopologyDiagram` is defined multiple times
+  199 | }
+  200 | import { Button } from "@/components/ui/button"
+> 201 | import { TopologyDiagram } from "@/components/topology-diagram"
+      |          ^^^^^^^^^^^^^^^
+  202 | import { Badge } from "@/components/ui/badge"
+  203 | import { PartnersBanner } from "@/components/partners-banner"
+  204 | import { StatsCounter } from "@/components/stats-counter"
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component] 
+ GET / 200 in 189ms (next.js: 5ms, application-code: 184ms)
+ GET /solutions 200 in 293ms (next.js: 37ms, application-code: 256ms)
+ GET /about 200 in 169ms (next.js: 35ms, application-code: 134ms)
+ GET / 200 in 151ms (next.js: 3ms, application-code: 148ms)
+ GET /solutions 200 in 158ms (next.js: 3ms, application-code: 155ms)
+ GET /about 200 in 172ms (next.js: 4ms, application-code: 168ms)
+✓ Compiled in 158ms
+ GET / 200 in 174ms (next.js: 4ms, application-code: 171ms)
+ GET /solutions 200 in 186ms (next.js: 4ms, application-code: 182ms)
+ GET /about 200 in 86ms (next.js: 3ms, application-code: 83ms)
+ GET / 200 in 131ms (next.js: 3ms, application-code: 128ms)
+ GET / 200 in 233ms (next.js: 4ms, application-code: 229ms)
+ GET / 200 in 160ms (next.js: 4ms, application-code: 156ms)
+✓ Compiled in 485ms
+✓ Compiled in 405ms
+✓ Compiled in 355ms
+ GET / 200 in 1280ms (next.js: 107ms, application-code: 1173ms)
+ GET / 200 in 253ms (next.js: 4ms, application-code: 249ms)
+ GET / 200 in 205ms (next.js: 4ms, application-code: 201ms)
+ GET / 200 in 241ms (next.js: 5ms, application-code: 236ms)
+ GET / 200 in 185ms (next.js: 7ms, application-code: 178ms)
+ GET / 200 in 153ms (next.js: 6ms, application-code: 146ms)
+ GET / 200 in 162ms (next.js: 2ms, application-code: 160ms)
+[?25h
