@@ -1,37 +1,23 @@
 # Website image assets
 
-Generated on 15 October 2026 with the built-in Imagegen tool. These are AI-generated editorial-style images for illustrative use; they do not depict verified Yasabe premises, employees or client projects.
+All photographic content images are stored locally in WebP format under `public/images/`. These are AI-generated editorial-style images for illustrative architectural presentation and do not depict verified Misyatech offices, staff, or client facilities.
 
-The five WebP files below are the production assets. They are stored locally in the repository and require no third-party image hosting. Original generated PNGs are retained by the image tool outside the repository; they are not required for builds.
+| Asset                                        | Usage                                                         | Format & Dimensions |
+| -------------------------------------------- | ------------------------------------------------------------- | ------------------- |
+| `public/images/home-business-hero.webp`      | Homepage parallax hero (Muscat scene)                         | WebP, 1920 × 720    |
+| `public/images/oman-dubai-skyline.webp`      | Hero Private AI scene & Oman/Dubai regional showcase          | WebP, 1600 × 900    |
+| `public/images/private-ai-datacenter.webp`   | Scroll-scrubbed Private AI chapter architectural suite        | WebP, 1200 × 900    |
+| `public/images/workspace-hero.webp`          | Hero Dubai scene, About hero card & Scroll Architecture step  | WebP, 1200 × 900    |
+| `public/images/og-misyatech.webp`            | Open Graph & Twitter card preview                             | WebP, 1200 × 630    |
+| `public/images/connected-workplace.webp`     | Expanding Practices (Networking) & Scroll Staging step        | WebP, 900 × 675     |
+| `public/images/ai-innovation.webp`           | Expanding Practices (Private AI)                              | WebP, 900 × 675     |
+| `public/images/technology-operations.webp`   | Expanding Practices (Managed IT)                              | WebP, 900 × 675     |
+| `public/images/team-collaboration.webp`      | Solutions hero & Scroll Handover step                         | WebP, 1200 × 900    |
+| `public/images/creative-web-crm-hrm.webp`    | Service Suites: Website Designing, CRM & HRM                  | WebP, 1200 × 900    |
+| `public/images/creative-fleet-management.webp` | Service Suites: Fleet Management & Field Dispatch          | WebP, 1200 × 900    |
+| `public/images/creative-ai-voice.webp`       | Service Suites: AI Voice Calling & Private AI Assistants      | WebP, 1200 × 900    |
+| `public/images/creative-core-infra-amc.webp` | Service Suites: Project AMC, Intune, AD, NTP, DHCP & DNS      | WebP, 1200 × 900    |
+| `public/logo.webp`                           | Placeholder horizontal Misyatech WebP logo                    | WebP, 680 × 140     |
+| `public/icon.webp`                           | Misyatech emblem mark                                         | WebP, 512 × 512     |
 
-| Asset                                      | Usage                                         |
-| ------------------------------------------ | --------------------------------------------- |
-| `public/images/workspace-hero.webp`        | Homepage hero and social previews; 1200 × 900 |
-| `public/images/connected-workplace.webp`   | Enterprise networking service card; 900 × 675 |
-| `public/images/ai-innovation.webp`         | Private AI service card; 900 × 675            |
-| `public/images/technology-operations.webp` | Managed IT service card; 900 × 675            |
-| `public/images/team-collaboration.webp`    | About page and solutions hero; 1200 × 900     |
-
-The previous networking/server illustrations and unused starter SVG images were deleted from the current project. Logo and favicon assets remain part of the existing brand identity. Layout and card geometry are preserved; photo color is displayed normally rather than with the former illustration blending mode.
-
-## Final prompt set
-
-### workspace-hero
-
-Use case: photorealistic-natural. Create a single landscape 4:3 premium editorial photograph for an enterprise technology website. Realistic photography, carefully composed, sophisticated and attractive, natural material textures, understated cool blue/neutral tones with warm daylight, professional architectural magazine art direction. No words, logos, signage, watermarks, graphs, interface overlays, cables, network diagrams, isolated server boxes, glowing circuit boards, isometric illustration, or science-fiction elements. This is illustrative brand imagery, not a depiction of a specific company's real facility or staff. Scene: a spectacular contemporary business innovation campus interior, double-height glass atrium, sculptural open staircase, pale stone and brushed metal, a few indoor trees, large windows opening onto a modern Middle Eastern city at golden hour. A small number of naturally posed professionals in the middle distance. Strong spatial depth and clean architectural lines. Camera at human eye level, 28mm architectural lens. Frame as a complete beautiful photographic image to sit beside text, not as a background with empty space. Grounded, quietly ambitious, editorial, no exaggerated futurism.
-
-### connected-workplace
-
-Use case: photorealistic-natural. Create a single landscape 4:3 premium editorial photograph for an enterprise technology website. Realistic photography, carefully composed, sophisticated and attractive, natural material textures, understated cool blue/neutral tones with warm daylight, professional architectural magazine art direction. No words, logos, signage, watermarks, graphs, interface overlays, cables, network diagrams, isolated server boxes, glowing circuit boards, isometric illustration, or science-fiction elements. This is illustrative brand imagery, not a depiction of a specific company's real facility or staff. Scene: an elegant contemporary corporate collaboration lounge, glass-fronted meeting rooms, comfortable dark-blue seating, timber wall details, daylight from generous windows. Two small groups of professionals work naturally at a distance, emphasizing a workplace connected through good infrastructure without displaying networking equipment. Wide composition, 35mm lens, impeccable architectural photography, meaningful spatial layers. No close-up people, no hardware boxes.
-
-### ai-innovation
-
-Use case: photorealistic-natural. Create a single landscape 4:3 premium editorial photograph for an enterprise technology website. Realistic photography, carefully composed, sophisticated and attractive, natural material textures, understated cool blue/neutral tones with warm daylight, professional architectural magazine art direction. No words, logos, signage, watermarks, graphs, interface overlays, cables, network diagrams, isolated server boxes, glowing circuit boards, isometric illustration, or science-fiction elements. This is illustrative brand imagery, not a depiction of a specific company's real facility or staff. Scene: a highly crafted close-up editorial photograph of a technology researcher at a desk using a real laptop with an indistinct screen, a translucent glass prototype and a softly blurred creative lab in the background. Frame the person's shoulder and natural hands from a side/rear angle without a prominent face. Slate blue clothing, tactile brushed metal, daylight, depth of field, thoughtful work and human intelligence rather than electronic hardware. Do not add robot heads, brains, neon, floating particles, circuitry or readable interface text.
-
-### technology-operations
-
-Use case: photorealistic-natural. Create a single landscape 4:3 premium editorial photograph for an enterprise technology website. Realistic photography, carefully composed, sophisticated and attractive, natural material textures, understated cool blue/neutral tones with warm daylight, professional architectural magazine art direction. No words, logos, signage, watermarks, graphs, interface overlays, cables, network diagrams, isolated server boxes, glowing circuit boards, isometric illustration, or science-fiction elements. This is illustrative brand imagery, not a depiction of a specific company's real facility or staff. Scene: two experienced IT professionals collaborating calmly at a clean contemporary operations workspace, photographed candidly in side profile at medium-wide distance. A woman and a man reviewing a laptop together, subtle blurred monitors further behind, natural body language, bright glass-partitioned office, muted blue and graphite palette, warm window light. Emphasis on teamwork and attentive service, not a stock-photo handshake or security control room. Realistic hands, faces and ordinary office details.
-
-### team-collaboration
-
-Use case: photorealistic-natural. Create a single landscape 4:3 premium editorial photograph for an enterprise technology website. Realistic photography, carefully composed, sophisticated and attractive, natural material textures, understated cool blue/neutral tones with warm daylight, professional architectural magazine art direction. No words, logos, signage, watermarks, graphs, interface overlays, cables, network diagrams, isolated server boxes, glowing circuit boards, isometric illustration, or science-fiction elements. This is illustrative brand imagery, not a depiction of a specific company's real facility or staff. Scene: a candid wide photograph of a diverse small team of three technology consultants reviewing a large paper project plan at an oak table in a refined glass meeting room. One colleague points naturally at the plan while others listen. Contemporary modest business-casual clothing appropriate to a Middle Eastern enterprise setting. Soft daylight, neutral stone walls, a quiet city view, restrained navy accents. Shot from slightly above table height with a 35mm lens. Authentic collaboration, no camera-facing poses, no handshake, no text legible on paper.
+Technology partner marks under `public/brands/*.svg` remain crisp vector SVGs. Browser-standard PWA/ICO icons (`favicon.ico`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`) are generated alongside WebP variants by `scripts/generate-misyatech-icons.mjs`.

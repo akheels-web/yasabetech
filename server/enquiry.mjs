@@ -1,4 +1,4 @@
-const SALES_EMAIL = "sales@yasabetech.com";
+const SALES_EMAIL = "sales@misyatech.com";
 const MAX_BODY_BYTES = 16384;
 const SERVICES = {
   networking: "Enterprise networking",
@@ -210,8 +210,8 @@ export async function handleEnquiry(request, env, { fetchImpl = fetch } = {}) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        from: { address: env.ZOHO_EMAIL_FROM, name: "Yasabe website" },
-        to: [{ email_address: { address: SALES_EMAIL, name: "Yasabe Sales" } }],
+        from: { address: env.ZOHO_EMAIL_FROM, name: "Misyatech website" },
+        to: [{ email_address: { address: SALES_EMAIL, name: "Misyatech Sales" } }],
         reply_to: [{ address: email.trim(), name: company.trim() }],
         subject: `Website enquiry — ${company.trim()}`,
         textbody,

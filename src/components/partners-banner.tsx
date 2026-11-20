@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/components/language-provider";
 
 const technologies = [
   { name: "Microsoft", file: "microsoft", label: "Microsoft" },
@@ -29,19 +32,44 @@ const technologies = [
 ];
 
 export function PartnersBanner() {
+  const { t } = useLanguage();
+
   return (
-    <section className="technology-strip" id="technology-ecosystem" aria-label="Technology ecosystem">
+    <section
+      className="technology-strip"
+      id="technology-ecosystem"
+      aria-label="Technology ecosystem"
+    >
       <div className="site-container technology-strip-layout">
         <div className="technology-strip-intro">
-          <p>Built around the technologies<br />your business relies on.</p>
+          <p>{t.marquee.intro}</p>
         </div>
-        <div className="technology-marquee">
+        <div className="technology-marquee" dir="ltr">
           <div className="technology-marquee-track">
             {[0, 1].map((copy) => (
-              <ul className="technology-logo-list" key={copy} aria-label={copy === 0 ? "Technology brands" : undefined} aria-hidden={copy === 1 ? true : undefined}>
+              <ul
+                className="technology-logo-list"
+                key={copy}
+                aria-label={copy === 0 ? "Technology brands" : undefined}
+                aria-hidden={copy === 1 ? true : undefined}
+              >
                 {technologies.map((brand) => (
-                  <li className={[brand.label ? "technology-logo-with-label" : "", brand.wide ? "technology-logo-wide" : ""].filter(Boolean).join(" ")} key={brand.file}>
-                    <Image src={`/brands/${brand.file}.svg`} alt={brand.label ? "" : brand.name} width={130} height={44} loading="eager" />
+                  <li
+                    className={[
+                      brand.label ? "technology-logo-with-label" : "",
+                      brand.wide ? "technology-logo-wide" : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    key={brand.file}
+                  >
+                    <Image
+                      src={`/brands/${brand.file}.svg`}
+                      alt={brand.label ? "" : brand.name}
+                      width={130}
+                      height={44}
+                      loading="eager"
+                    />
                     {brand.label && <span>{brand.label}</span>}
                   </li>
                 ))}

@@ -81,10 +81,9 @@ async function generateAssets() {
 
   const logoSharp = sharp(outBuf, { raw: { width: ci.width, height: ci.height, channels: 4 } });
 
-  // Save public/logo.png and public/logo.webp
-  await logoSharp.clone().png({ quality: 100, compressionLevel: 9 }).toFile(path.join(PUBLIC_DIR, "logo.png"));
+  // Save public/logo.webp (WebP-only pipeline)
   await logoSharp.clone().webp({ quality: 96, lossless: false }).toFile(path.join(PUBLIC_DIR, "logo.webp"));
-  console.log(`Saved public/logo.png and public/logo.webp (${ci.width}x${ci.height})`);
+  console.log(`Saved public/logo.webp (${ci.width}x${ci.height})`);
 
   // 2. Process Icon & Favicon from Image 2
   console.log("Processing brand icon from Image 2...");
@@ -104,7 +103,7 @@ async function generateAssets() {
   // Save icons in multiple sizes
   await iconBase.clone().resize(512, 512).png().toFile(path.join(PUBLIC_DIR, "icon-512.png"));
   await iconBase.clone().resize(192, 192).png().toFile(path.join(PUBLIC_DIR, "icon-192.png"));
-  await iconBase.clone().resize(512, 512).png().toFile(path.join(PUBLIC_DIR, "icon.png"));
+  await iconBase.clone().resize(512, 512).webp({ quality: 92 }).toFile(path.join(PUBLIC_DIR, "icon.webp"));
   await iconBase.clone().resize(512, 512).png().toFile(path.join(APP_DIR, "icon.png"));
 
   // Apple touch icon 180x180

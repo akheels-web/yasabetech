@@ -1,338 +1,185 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Cpu,
-  Network,
-  Server,
-  ShieldCheck,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { RFQModal } from "@/components/rfq-modal";
+import { MapPin } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
 import { PartnersBanner } from "@/components/partners-banner";
-
-const services = [
-  {
-    id: "networking",
-    icon: Network,
-    title: "Networks that keep you connected.",
-    label: "Enterprise networking",
-    description:
-      "From the campus to the data center. Build resilient SD-WAN, high-density wireless and high-speed network fabrics around the way your business works.",
-    image: "/images/connected-workplace.webp",
-    imageAlt:
-      "Professionals collaborating in a contemporary office lounge and glass meeting room",
-    tags: ["SD-WAN", "Wi-Fi 7", "Data center fabrics"],
-  },
-  {
-    id: "ai",
-    icon: Cpu,
-    title: "Your AI. Your infrastructure.",
-    label: "Private AI & compute",
-    description:
-      "Bring intelligence closer to your data with GPU infrastructure, private language models and on-premise inference designed for your workloads.",
-    image: "/images/ai-innovation.webp",
-    imageAlt:
-      "Technology researcher working at a laptop in a bright innovation workspace",
-    tags: ["GPU clusters", "Private LLMs", "Data sovereignty"],
-  },
-  {
-    id: "managed-it",
-    icon: Server,
-    title: "Operations with people behind them.",
-    label: "Managed IT & security",
-    description:
-      "Keep your infrastructure in experienced hands. Monitoring, storage, backup and incident support, brought together under a clearly defined service agreement.",
-    image: "/images/technology-operations.webp",
-    imageAlt:
-      "Two technology professionals reviewing work together at a laptop",
-    tags: ["24/7 monitoring", "Hybrid cloud", "Backup & recovery"],
-  },
-];
-const process = [
-  {
-    title: "Understand & architect",
-    description:
-      "We review your requirements, existing environment and BOQ. Compatibility, capacity and risk are considered before procurement.",
-  },
-  {
-    title: "Source & validate",
-    description:
-      "Hardware sourcing, configuration and pre-staging come together so your equipment arrives ready for the deployment plan.",
-  },
-  {
-    title: "Deploy & support",
-    description:
-      "From commissioning and documentation to ongoing monitoring, your team has a clear path from handover to operations.",
-  },
-];
+import { RFQModal } from "@/components/rfq-modal";
+import { PageJsonLd } from "@/components/seo-jsonld";
+import { CapabilityIndex } from "@/components/interactive/capability-index";
+import { ExpandingPractices } from "@/components/interactive/expanding-practices";
+import { HeroShowcase } from "@/components/interactive/hero-showcase";
+import { ScrollReveal } from "@/components/interactive/scroll-reveal";
+import { ScrollStory } from "@/components/interactive/scroll-story";
+import { ServiceSuites } from "@/components/interactive/service-suites";
+import { TiltCard } from "@/components/interactive/tilt-card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function HomePage() {
-  const [category, setCategory] = useState("networking");
+  const { t } = useLanguage();
   const [quoteOpen, setQuoteOpen] = useState(false);
-  const openQuote = (value = "networking") => {
-    setCategory(value);
+  const [category, setCategory] = useState("networking");
+  const [quoteScope, setQuoteScope] = useState("");
+  const quoteTrigger = useRef<HTMLButtonElement | null>(null);
+
+  const openQuote = (
+    trigger?: HTMLButtonElement | null,
+    service = "networking",
+    scope = "",
+  ) => {
+    quoteTrigger.current = trigger ?? null;
+    setCategory(service);
+    setQuoteScope(scope);
     setQuoteOpen(true);
   };
+
+  const changeQuoteOpen = (open: boolean) => {
+    setQuoteOpen(open);
+    if (!open) requestAnimationFrame(() => quoteTrigger.current?.focus());
+  };
+
   return (
-    <div>
-      <section className="home-hero">
-        <div className="site-container hero-layout">
-          <div className="hero-copy">
-            <p className="hero-intro">
-              <span /> Connect. Secure. Empower.
-            </p>
-            <h1>
-              Built for what
-              <br className="hidden sm:block" /> comes next.
-            </h1>
-            <p className="hero-description">
-              The networks, private AI and IT infrastructure your business moves
-              on. Expertly designed. Carefully delivered. Continuously
-              supported.
-            </p>
-            <div className="hero-actions">
-              <Button variant="brand" size="lg" onClick={() => openQuote()}>
-                Let’s build your solution{" "}
-                <ArrowUpRight className="ml-3 h-4 w-4" />
-              </Button>
-              <Link href="/solutions" className="text-link">
-                Explore our expertise <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="hero-note">
-              <ShieldCheck className="h-4 w-4" />
-              <span>One partner, from architecture to operations.</span>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="hero-visual-label">
-              <span className="status-dot" /> Technology, designed around people
-            </div>
-            <Image
-              src="/images/workspace-hero.webp"
-              alt="Sunlit contemporary business atrium with open staircases, greenery and a city view"
-              width={1200}
-              height={900}
-              sizes="(max-width: 900px) 100vw, 58vw"
-              preload
-              className="hero-art"
-            />
-            <div className="hero-visual-caption">
-              <Network className="h-5 w-5" />
-              <div>
-                <strong>Built around your business.</strong>
-                <span>People. Ideas. Possibility.</span>
-              </div>
-              <span className="caption-line" />
-              <ArrowUpRight className="h-5 w-5" />
-            </div>
-          </div>
-        </div>
-        <div className="site-container hero-bottom">
-          <span>Enterprise technology. End to end.</span>
-          <a href="#expertise">
-            Discover Yasabe <ArrowDown className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </section>
+    <div className="bg-white text-[#08152B]">
+      <PageJsonLd
+        breadcrumbs={[{ name: "Home", path: "/" }]}
+        faqItems={t.faq.items}
+      />
+
+      {/* Band 1: Interactive 3-Scene Parallax Hero */}
+      <HeroShowcase onOpenQuote={openQuote} />
+
+      {/* Band 2: Continuous 25-Brand Technology Marquee */}
       <PartnersBanner />
-      <section id="expertise" className="section-space site-container">
-        <div className="section-heading">
-          <div>
-            <p className="section-kicker">Our expertise</p>
-            <h2>
-              Complex technology.
-              <br />A clear way forward.
-            </h2>
-          </div>
-          <p>
-            Three connected practices. One team to bring your infrastructure
-            together, from the first conversation to everyday operations.
-          </p>
-        </div>
-        <div className="service-grid">
-          {services.map(({ icon: Icon, ...service }) => (
-            <article className="service-card" key={service.id}>
-              <Link
-                href={`/solutions#${service.id}`}
-                className="service-image-link"
-                aria-label={`Explore ${service.label.toLowerCase()}`}
-              >
-                <Image
-                  src={service.image}
-                  alt={service.imageAlt}
-                  width={900}
-                  height={675}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                  className="service-image"
-                />
-                <span className="service-image-arrow">
-                  <ArrowUpRight className="h-5 w-5" />
-                </span>
-              </Link>
-              <div className="service-card-content">
-                <p className="service-label">
-                  <Icon className="h-4 w-4" />
-                  {service.label}
+
+      {/* Band 3: Horizontal Expanding Architectural Practice Panels */}
+      <ExpandingPractices onOpenQuote={openQuote} />
+
+      {/* Band 4: Specialized Services & Digital Platforms with Bespoke Creatives */}
+      <ServiceSuites onOpenQuote={openQuote} />
+
+      {/* Band 5: Scroll-Scrubbed Delivery Narrative */}
+      <ScrollStory />
+
+      {/* Band 5: Oman & Dubai Executive Footprint + Interactive Capability Index */}
+      <section
+        id="regional-footprint"
+        aria-labelledby="regional-footprint-title"
+        className="bg-[#F4F8FF] py-16 lg:py-24 border-b border-[#DCE6F5] scroll-mt-24"
+      >
+        <div className="site-container">
+          <ScrollReveal>
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1D4ED8] mb-3">
+                  {t.regionalSection.eyebrow}
                 </p>
-                <h3>{service.title}</h3>
-                <p className="service-description">{service.description}</p>
-                <ul className="service-tags">
-                  {service.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
-                <button
-                  className="text-link"
-                  onClick={() => openQuote(service.id)}
+                <h2
+                  id="regional-footprint-title"
+                  className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#08152B]"
                 >
-                  Discuss your project <ArrowRight className="h-4 w-4" />
-                </button>
+                  {t.regionalSection.title}
+                </h2>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="approach-section">
-        <div className="site-container approach-layout">
-          <div className="approach-copy">
-            <p className="section-kicker">The Yasabe approach</p>
-            <h2>
-              Good infrastructure
-              <br />
-              starts long before
-              <br />
-              the first connection.
-            </h2>
-            <p>
-              A hardware list is only the beginning. We look at the whole
-              environment: how systems connect, where your data lives and what
-              your people need to keep moving.
-            </p>
-            <Button asChild variant="outline">
-              <Link href="/about">
-                Meet your technology partner{" "}
-                <ArrowUpRight className="ml-3 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          <div className="process-list">
-            {process.map((step, i) => (
-              <article className="process-step" key={step.title}>
-                <span className="process-number">0{i + 1}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="site-container section-space">
-        <div className="section-heading">
-          <div>
-            <p className="section-kicker">Designed around your business</p>
-            <h2>
-              Your next challenge.
-              <br />
-              Our starting point.
-            </h2>
-          </div>
-          <Link href="/solutions#calculator" className="text-link">
-            Plan your next project <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="needs-grid">
-          {[
-            {
-              title: "Connect a growing enterprise",
-              description:
-                "Bring branches, people and applications together with a network designed to grow with you.",
-              category: "networking",
-              tag: "Connectivity",
-            },
-            {
-              title: "Put private AI to work",
-              description:
-                "Plan the compute and data environment for inference, fine-tuning and enterprise knowledge.",
-              category: "ai",
-              tag: "Intelligence",
-            },
-            {
-              title: "Take control of daily operations",
-              description:
-                "Give your internal team the visibility, backup and operational support it needs.",
-              category: "managed-it",
-              tag: "Continuity",
-            },
-          ].map((item) => (
-            <Link
-              className="need-item"
-              href={`/solutions#${item.category}`}
-              key={item.title}
-            >
-              <span>{item.tag}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <ArrowUpRight className="h-5 w-5" />
-            </Link>
-          ))}
-        </div>
-      </section>
-      <section className="contact-section" id="contact">
-        <div className="site-container contact-layout">
-          <div>
-            <p className="section-kicker">Start a conversation</p>
-            <h2>
-              Let’s make your next
-              <br />
-              move a confident one.
-            </h2>
-            <p>
-              Have a BOQ, a brief or a challenge to solve?
-              <br />
-              Tell us what you’re working on.
-            </p>
-            <div className="contact-checks">
-              <span>
-                <Check /> Architecture review
-              </span>
-              <span>
-                <Check /> Hardware sourcing
-              </span>
-              <span>
-                <Check /> Ongoing support
-              </span>
+              <p className="max-w-md text-xs sm:text-sm leading-relaxed text-[#4A5E7A]">
+                {t.regionalSection.subtitle}
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+              {t.regionalSection.cards.map((card) => (
+                <TiltCard
+                  key={card.code}
+                  variant="white"
+                  className="p-6 sm:p-7 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D4ED8]">
+                        <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
+                        <span>{card.cities}</span>
+                      </span>
+                      <span className="font-mono text-[11px] font-semibold text-[#4A5E7A]">
+                        {card.code}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-2xl font-semibold text-[#08152B]">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[#4A5E7A]">
+                      {card.description}
+                    </p>
+                  </div>
+                </TiltCard>
+              ))}
+            </div>
+
+            <div className="group relative min-h-[280px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-[#C4B5FD]/35 bg-[#1B1145] shadow-lg">
+              <Image
+                src="/images/oman-dubai-skyline.webp"
+                alt={t.regionalSection.skylineImageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 46vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <div
+                aria-hidden="true"
+                className="img-veil-card pointer-events-none absolute inset-0"
+              />
+              <div className="relative z-10 flex h-full items-end p-4 sm:p-5">
+                <p className="w-full rounded-xl border border-[#C4B5FD]/25 bg-[#1B1145]/65 px-4 py-3 text-xs sm:text-sm font-semibold text-[#F4F8FF] backdrop-blur-md">
+                  {t.regionalSection.skylineCaption}
+                </p>
+              </div>
             </div>
           </div>
-          <div className="contact-actions">
-            <Button
-              variant="brand"
-              size="lg"
-              onClick={() => openQuote("hardware-boq")}
-            >
-              Talk to our team <ArrowUpRight className="ml-4 h-5 w-5" />
-            </Button>
-            <a href="mailto:sales@yasabetech.com">
-              sales@yasabetech.com <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <span>Prefer to share a document? Attach it to your email.</span>
-          </div>
         </div>
       </section>
+
+      {/* Band 6: Swiss Interactive 01-08 Capability Index */}
+      <CapabilityIndex onOpenQuote={openQuote} />
+
+      {/* Band 7: Clean Hairline Executive FAQ */}
+      <section
+        aria-labelledby="faq-title"
+        className="bg-[#F4F8FF] py-16 lg:py-20 border-t border-[#DCE6F5]"
+      >
+        <div className="site-container max-w-4xl">
+          <div className="mb-8 text-start">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1D4ED8] mb-3">
+              {t.faq.eyebrow}
+            </p>
+            <h2
+              id="faq-title"
+              className="font-heading text-3xl sm:text-4xl font-semibold text-[#08152B]"
+            >
+              {t.faq.title}
+            </h2>
+          </div>
+
+          <Accordion type="single" collapsible>
+            {t.faq.items.map((item, idx) => (
+              <AccordionItem key={item.q} value={`faq-${idx}`}>
+                <AccordionTrigger>{item.q}</AccordionTrigger>
+                <AccordionContent>{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       <RFQModal
-        key={category}
         open={quoteOpen}
-        onOpenChange={setQuoteOpen}
+        onOpenChange={changeQuoteOpen}
         initialCategory={category}
+        initialScope={quoteScope}
       />
     </div>
   );

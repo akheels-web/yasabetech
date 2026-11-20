@@ -1,20 +1,21 @@
-# YasabeTech Project Architecture & Knowledge Base
+# Misyatech Project Architecture & Knowledge Base
 
 ## Overview
-YasabeTech is an enterprise-grade web application for a premier Technology Services provider specializing in:
+Misyatech is an enterprise-grade Next.js 16 static-export web application serving **Oman (Muscat, Sohar, Duqm, Salalah) & Dubai / UAE**, specializing in:
 1. **High-Performance Enterprise Networking** (SD-WAN, Enterprise Wi-Fi 7, Core Switching, Data Center Fabric, Zero Trust)
-2. **Advanced AI Services & Infrastructure** (Private LLM Deployment, GPU Compute Clusters, AI Ops, Autonomous Business Agents)
-3. **Managed IT & Cloud Infrastructure** (Hybrid Cloud, Cybersecurity & SOC, Enterprise Storage/Servers, 24/7 SLA Engineering)
-
-Inspired by the clean, authoritative B2B enterprise delivery model of [identiti.sa](https://identiti.sa), YasabeTech features an ultra-modern 2026 design system, interactive RFQ quotation flows, high-trust partner matrices, and full responsive design.
+2. **Private AI & Sovereign Compute** (Private LLM Deployment, GPU Compute Clusters, Bilingual Arabic/English RAG Search, Smart Facility IoT)
+3. **Managed IT, Cybersecurity & BOQ Sourcing** (Hybrid Cloud, Next-Gen Security, Enterprise Storage/Servers, Transparent BOQ Validation)
 
 ## Technical Stack
-- **Framework**: Next.js 16 with App Router
+- **Framework**: Next.js 16.4.6 with App Router (`output: "export"`, static HTML export to `out/`)
 - **Engine**: Turbopack (`next dev --turbopack`)
-- **Styling**: Tailwind CSS v4 + Curated modern design tokens & glassmorphism
-- **Component Primitives**: shadcn/ui patterns with Radix UI primitives & Lucide Icons
-- **TypeScript**: Strict type definitions
+- **Styling**: Tailwind CSS v4 + Architectural Navy & Light Blue tokens (`#050E1E` / `#07142B` Deep Navy, `#1D4ED8` Cobalt, `#38BDF8` / `#7DD3FC` Light Blue, `#F4F8FF` Glacier Mist)
+- **Typography**: `Outfit`, `Plus Jakarta Sans`, `Cairo`, and `IBM Plex Sans Arabic` via `next/font/google`
+- **Bilingual EN / العربية (RTL)**: `LanguageProvider` (`useSyncExternalStore`) + `src/lib/i18n.ts` switching `dir="ltr" | "rtl"` and `lang="en" | "ar"`
+- **Interactive & UI Components**: shadcn/ui primitives (Radix Accordion hairline rows, Dialog, Tabs, Select, Button with kinetic hover + `azure`/`brand`/`glass` variants, Badge, Separator) + custom interactive components (`HeroShowcase` 3-scene lens, `ExpandingPractices` horizontal flex panels, `ServiceSuites` 4-creative 13-service showcase with instant search, `ScrollStory` scroll-scrubbed clip-path reveal, `CapabilityIndex` 01-08 live preview, `TiltCard` specular border glow, `MagneticButton`, `ScrollProgressRail`, `ScrollReveal`, `ScopeEstimator`)
+- **Backend Function**: Cloudflare Pages Function (`/api/enquiry`) via `server/enquiry.mjs` sending to `sales@misyatech.com` via Zoho transactional email + Cloudflare Turnstile verification
+- **SEO Power Pack**: JSON-LD (`Organization`, `WebSite`, `ProfessionalService`, `BreadcrumbList`, `FAQPage`), `manifest.ts`, `robots.ts`, `sitemap.ts`, Open Graph WebP (`og-misyatech.webp`), geo tags (`OM;AE`)
 - **Pages**:
-  - `/` (Home / Landing Page)
-  - `/about` (About Us - Vision, Leadership, Trust Pillars, Certifications)
-  - `/solutions` (Solutions - Deep-dive Networking, AI Services, Managed IT with interactive filters & RFQ calculator)
+  - `/` (Home / Flagship Showcase)
+  - `/solutions` (8 Solution Areas, Category Filter, Scope Planner, Delivery Steps, FAQ)
+  - `/about` (Company Ethos, Oman & Dubai Regional Alignment, Guiding Principles, 4-Step Delivery Process)

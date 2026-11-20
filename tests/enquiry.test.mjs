@@ -4,24 +4,24 @@ import { handleEnquiry } from "../server/enquiry.mjs";
 
 const env = {
   ZOHO_EMAIL_API_KEY: "fake-test-key",
-  ZOHO_EMAIL_FROM: "website@yasabetech.com",
+  ZOHO_EMAIL_FROM: "website@misyatech.com",
   TURNSTILE_SECRET_KEY: "fake-test-secret",
 };
 const valid = {
   company: "Example Company",
   email: "buyer@example.com",
-  phone: "+966 11 123 4567",
+  phone: "+971 4 123 4567",
   timeline: "Within a month",
-  scope: "Three sites and a private AI workload.",
+  scope: "Muscat and Dubai branch connectivity and private AI cluster.",
   services: ["ai", "networking"],
   turnstileToken: "fake-test-token",
   website: "",
 };
 const request = (data = valid, headers = {}) =>
-  new Request("https://yasabetech.com/api/enquiry", {
+  new Request("https://misyatech.com/api/enquiry", {
     method: "POST",
     headers: {
-      Origin: "https://yasabetech.com",
+      Origin: "https://misyatech.com",
       "Content-Type": "application/json",
       ...headers,
     },
@@ -30,7 +30,7 @@ const request = (data = valid, headers = {}) =>
 const verification = (data = {}) =>
   Response.json({
     success: true,
-    hostname: "yasabetech.com",
+    hostname: "misyatech.com",
     action: "enquiry",
     ...data,
   });
@@ -59,10 +59,10 @@ test("valid enquiry is sent only to sales, from the verified sender, with visito
     "Zoho-enczapikey fake-test-key",
   );
   const payload = JSON.parse(calls[1].options.body);
-  assert.equal(payload.to[0].email_address.address, "sales@yasabetech.com");
-  assert.equal(payload.from.address, "website@yasabetech.com");
+  assert.equal(payload.to[0].email_address.address, "sales@misyatech.com");
+  assert.equal(payload.from.address, "website@misyatech.com");
   assert.equal(payload.reply_to[0].address, "buyer@example.com");
-  assert.match(payload.textbody, /Three sites/);
+  assert.match(payload.textbody, /Muscat and Dubai/);
   assert.match(payload.textbody, /Private AI, IoT/);
   assert.equal(payload.track_opens, false);
 });
@@ -84,7 +84,7 @@ test("visitor-supplied recipient and sender cannot override mail routing", async
       },
     },
   );
-  assert.equal(outbound.to[0].email_address.address, "sales@yasabetech.com");
+  assert.equal(outbound.to[0].email_address.address, "sales@misyatech.com");
   assert.equal(outbound.from.address, env.ZOHO_EMAIL_FROM);
 });
 
@@ -206,7 +206,7 @@ test("rejects other origins, unsupported content types and oversized bodies", as
   assert.equal(
     (
       await handleEnquiry(
-        new Request("https://yasabetech.com/api/enquiry"),
+        new Request("https://misyatech.com/api/enquiry"),
         env,
         { fetchImpl: forbiddenFetch },
       )

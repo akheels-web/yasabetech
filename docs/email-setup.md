@@ -1,14 +1,14 @@
 # Direct enquiries to Zoho Mail
 
-The receiving mailbox is **sales@yasabetech.com**. Since it already receives mail in Zoho Mail, keep its existing mail routing and MX records.
+The receiving mailbox is **sales@misyatech.com**. Since it already receives mail in Zoho Mail, keep its existing mail routing and MX records.
 
-The website now submits to a Cloudflare Pages Function at `/api/enquiry`. That function validates the request, verifies Turnstile and asks Zoho's transactional email API to send to the fixed sales mailbox. The visitor's address is used as Reply-To; it is never used as an unauthenticated sender. A successful response means Zoho accepted the email for delivery, not that inbox delivery has been independently confirmed.
+The website submits to a Cloudflare Pages Function at `/api/enquiry`. That function validates the request, verifies Turnstile and asks Zoho's transactional email API to send to the fixed sales mailbox. The visitor's address is used as Reply-To; it is never used as an unauthenticated sender. A successful response means Zoho accepted the email for delivery, not that inbox delivery has been independently confirmed.
 
 ## 1. Set up a transactional sender in Zoho
 
-Use Zoho's transactional email product (ZeptoMail / Zoho CPaaS), not your Zoho Mail mailbox password. Create a sending agent and verify `yasabetech.com`. Copy the domain authentication records and the sending API endpoint shown for your account's data center. Add only the records required to authenticate the transactional sender; do not replace the working mailbox's MX records.
+Use Zoho's transactional email product (ZeptoMail / Zoho CPaaS), not your Zoho Mail mailbox password. Create a sending agent and verify `misyatech.com`. Copy the domain authentication records and the sending API endpoint shown for your account's data center. Add only the records required to authenticate the transactional sender; do not replace the working mailbox's MX records.
 
-Use a verified sender such as `website@yasabetech.com`. If you prefer to send from `sales@yasabetech.com`, configure that verified sender instead. Generate the sending API key for the agent. The provider account must be approved for sending and have an available sending allowance.
+Use a verified sender such as `website@misyatech.com`. If you prefer to send from `sales@misyatech.com`, configure that verified sender instead. Generate the sending API key for the agent. The provider account must be approved for sending and have an available sending allowance.
 
 Official references: [sending API](https://www.zoho.com/cpaas/help/api/email-sending.html), [domain verification](https://www.zoho.com/zeptomail/help/domains.html). Zoho's current API documentation uses `https://cpaas.zoho.com/v1.1/email`; use your account's endpoint if it differs. Regional `api.zeptomail.*` sending endpoints are also supported by the handler.
 
@@ -27,7 +27,7 @@ In your Cloudflare Pages project's Variables and Secrets settings, configure the
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Public build variable  | Turnstile site key                                  |
 | `ZOHO_EMAIL_API_KEY`             | Secret runtime binding | Sending API key from Zoho                           |
 | `TURNSTILE_SECRET_KEY`           | Secret runtime binding | Turnstile secret key                                |
-| `ZOHO_EMAIL_FROM`                | Secret runtime binding | Your verified sender, e.g. `website@yasabetech.com` |
+| `ZOHO_EMAIL_FROM`                | Secret runtime binding | Your verified sender, e.g. `website@misyatech.com`  |
 | `ZOHO_EMAIL_API_URL`             | Secret runtime binding | Exact sending endpoint from your Zoho account       |
 
 Store all four runtime values as Secrets in the Pages dashboard. The sender and endpoint are not confidential, but using secret bindings keeps these account-specific values outside this repository's Wrangler configuration. Ordinary runtime variables are managed by `wrangler.jsonc` when that file is the project's source of truth. Public build variables are still entered in the Pages build settings.
@@ -40,7 +40,7 @@ Official references: [Pages Functions](https://developers.cloudflare.com/pages/f
 
 ## 4. Verify the live flow
 
-Send a test enquiry yourself after deploying with the real settings. Confirm it reaches `sales@yasabetech.com`, check the spam folder and verify that Reply targets the visitor's email. The website shows a reference only after Zoho accepts the message. Missing credentials, failed verification and provider errors cannot produce a success screen.
+Send a test enquiry yourself after deploying with the real settings. Confirm it reaches `sales@misyatech.com`, check the spam folder and verify that Reply targets the visitor's email. The website shows a reference only after Zoho accepts the message. Missing credentials, failed verification and provider errors cannot produce a success screen.
 
 ## Local development
 

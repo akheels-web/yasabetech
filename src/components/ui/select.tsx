@@ -29,7 +29,7 @@ export function Select({
     >
       <SelectPrimitive.Trigger
         id={id}
-        className="form-control group flex h-11 w-full items-center justify-between gap-2 rounded-xl border border-slate-300 bg-white px-3.5 text-left text-sm font-normal text-slate-900 shadow-sm transition-[border-color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50"
+        className="form-control group flex h-11 w-full items-center justify-between gap-2 rounded-xl border border-[#CBDAF0] bg-white px-3.5 text-start text-sm font-normal text-[#08152B] shadow-xs transition-[border-color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50"
       >
         <span className="truncate">
           <SelectPrimitive.Value />
@@ -53,10 +53,10 @@ export function Select({
               <SelectPrimitive.Item
                 key={option}
                 value={option}
-                className="relative flex min-h-10 cursor-pointer select-none items-center rounded-lg py-2 pl-3 pr-9 text-[13px] font-normal text-slate-700 outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-950 data-[state=checked]:bg-blue-50 data-[state=checked]:font-medium data-[state=checked]:text-blue-700"
+                className="relative flex min-h-10 cursor-pointer select-none items-center rounded-lg py-2 ps-3 pe-9 text-[13px] font-normal text-slate-700 outline-none data-[highlighted]:bg-[#F4F8FF] data-[highlighted]:text-[#07142B] data-[state=checked]:bg-[#EAF2FF] data-[state=checked]:font-medium data-[state=checked]:text-[#1D4ED8]"
               >
                 <SelectPrimitive.ItemText>{option}</SelectPrimitive.ItemText>
-                <SelectPrimitive.ItemIndicator className="absolute right-3">
+                <SelectPrimitive.ItemIndicator className="absolute end-3">
                   <Check className="h-4 w-4" />
                 </SelectPrimitive.ItemIndicator>
               </SelectPrimitive.Item>
