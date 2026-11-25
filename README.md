@@ -1,6 +1,6 @@
 # Misyatech
 
-A bilingual (`EN` / `العربية` RTL) Next.js 16 enterprise technology website tailored for organizations in **Oman (Muscat, Sohar, Duqm, Salalah)** and **Dubai / UAE**. The site exports to static HTML, CSS and JavaScript for Cloudflare Pages; a Pages Function handles verified enquiry delivery to Zoho Mail (`sales@misyatech.com`).
+A bilingual (`EN` / `العربية` RTL) Next.js 16 enterprise technology website tailored for organizations in **Oman (Muscat, Sohar, Duqm, Salalah)** and **Dubai / UAE**. The site exports to static HTML, CSS and JavaScript in `out/` and deploys to **Cloudflare Workers with Static Assets** (`worker/index.ts`), where `/api/enquiry` handles verified enquiry delivery to Zoho Mail (`sales@misyatech.com`).
 
 ## Local development
 
@@ -33,9 +33,9 @@ The build writes `out/`. The preview server serves the static export at http://l
 node scripts/generate-brand-assets.mjs "path/to/misyatech.png"
 ```
 
-## Cloudflare Pages configuration
+## Cloudflare Workers configuration
 
-Follow the [Cloudflare Free hosting guide](docs/cloudflare-hosting.md) and [email setup guide](docs/email-setup.md) for deployment, Zoho transactional email secrets (`ZOHO_EMAIL_FROM=website@misyatech.com`), Turnstile keys, and `NEXT_PUBLIC_SITE_URL=https://misyatech.com`.
+Follow the [Cloudflare Workers hosting guide](docs/cloudflare-hosting.md), [email setup guide](docs/email-setup.md), and [production roadmap](docs/roadmap.md) for deployment (`npm run deploy`), Worker runtime secrets (`ZOHO_EMAIL_FROM=website@misyatech.com`, `ZOHO_EMAIL_API_URL=https://api.zeptomail.in/v1.1/email`), Turnstile keys, and `NEXT_PUBLIC_SITE_URL=https://misyatech.com`.
 
 ## Content, SEO & Media Assets
 

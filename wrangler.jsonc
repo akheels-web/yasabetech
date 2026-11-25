@@ -1,5 +1,24 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "misyatech",
-  "compatibility_date": "2026-10-15",
-  "pages_build_output_dir": "./out",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "misyatech.com", "custom_domain": true },
+    { "pattern": "www.misyatech.com", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
+  }
 }

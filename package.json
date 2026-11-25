@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "node scripts/preview.mjs",
     "preview": "node scripts/preview.mjs",
-    "preview:functions": "wrangler pages dev out",
-    "check:functions": "wrangler pages functions build --outdir .wrangler/functions",
+    "preview:worker": "wrangler dev",
+    "check:worker": "wrangler deploy --dry-run",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
     "test": "node --test tests/enquiry.test.mjs",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc -p worker/tsconfig.json --noEmit",
     "lint": "eslint"
   },
   "engines": {
