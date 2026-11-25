@@ -25,15 +25,14 @@ The `/api/enquiry` endpoint currently fails closed (`503`) by design until Cloud
 
 ## Priority 2: Automated GitHub -> Cloudflare Workers CI/CD
 
-The initial deployment was published directly from the CLI (`npx wrangler deploy`), so commits pushed to GitHub do **not** automatically rebuild or redeploy the Worker yet.
+Connected **Cloudflare Workers Builds** to `akheels-web/yasabetech` (`main` branch, auto-build and PR previews enabled, `NEXT_PUBLIC_SITE_URL=https://misyatech.com`, `NODE_VERSION=22`). Every push to `main` now rebuilds and deploys the Worker automatically.
 
-- [ ] **Commit and push** the Misyatech rebrand and Workers configuration to GitHub (`main`).
-- [ ] **Connect Cloudflare Workers Builds** (Dashboard -> **Workers & Pages -> `misyatech` -> Settings -> Builds -> Connect**):
-  - Production branch: `main`
+- [x] **Commit and push** the Misyatech rebrand and Workers configuration to GitHub (`main`).
+- [x] **Connect Cloudflare Workers Builds** (`akheels-web/yasabetech`, trigger `ad7f9bec-6602-4af1-a71a-e47b95eca297`):
+  - Production branch: `main` (auto-build + PR previews enabled)
   - Build command: `npm run build`
   - Deploy command: `npx wrangler deploy`
-  - Public build variables: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
-  - *(Alternative: add a GitHub Actions workflow using `cloudflare/wrangler-action` and a `CLOUDFLARE_API_TOKEN` repository secret.)*
+  - Public build variables configured: `NEXT_PUBLIC_SITE_URL=https://misyatech.com`, `NODE_VERSION=22` (add `NEXT_PUBLIC_TURNSTILE_SITE_KEY` here once Priority 1 widget is created)
 
 ## Priority 3: Production Polish & SEO Operations
 
