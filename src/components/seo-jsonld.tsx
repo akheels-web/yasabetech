@@ -14,6 +14,7 @@ export function SiteJsonLd() {
         alternateName: ["ميسياتك", "Misyatech Technologies"],
         url: siteUrl,
         logo: `${siteUrl}/icon.webp`,
+        image: `${siteUrl}/logo.webp`,
         email: SALES_EMAIL,
         description:
           "Enterprise networking, private AI compute and managed IT infrastructure partner serving organizations in Muscat, Oman and Dubai, UAE.",

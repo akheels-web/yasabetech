@@ -25,11 +25,13 @@ npm run preview
 
 The build writes `out/`. The preview server serves the static export at http://localhost:4173.
 
-## Custom Logo Replacement
+## Brand Assets & Icons
 
-`src/components/brand-logo.tsx` currently renders a geometric interlocking M architectural monogram while you prepare your final corporate logo. When ready:
-1. Replace `public/logo.webp` (or run `node scripts/generate-brand-assets.mjs "path/to/logo.png" "path/to/icon.png"`).
-2. Set `USE_CUSTOM_LOGO_IMAGE = true` in `src/components/brand-logo.tsx`.
+`src/components/brand-logo.tsx` renders the official Misyatech horizontal logo (`public/logo.webp` on light surfaces and `public/logo-dark.webp` on dark navy surfaces). To regenerate logo and icon derivatives from an updated transparent PNG master, run:
+
+```sh
+node scripts/generate-brand-assets.mjs "path/to/misyatech.png"
+```
 
 ## Cloudflare Pages configuration
 

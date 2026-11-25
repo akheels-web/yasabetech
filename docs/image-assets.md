@@ -17,7 +17,8 @@ All photographic content images are stored locally in WebP format under `public/
 | `public/images/creative-fleet-management.webp` | Service Suites: Fleet Management & Field Dispatch          | WebP, 1200 × 900    |
 | `public/images/creative-ai-voice.webp`       | Service Suites: AI Voice Calling & Private AI Assistants      | WebP, 1200 × 900    |
 | `public/images/creative-core-infra-amc.webp` | Service Suites: Project AMC, Intune, AD, NTP, DHCP & DNS      | WebP, 1200 × 900    |
-| `public/logo.webp`                           | Placeholder horizontal Misyatech WebP logo                    | WebP, 680 × 140     |
-| `public/icon.webp`                           | Misyatech emblem mark                                         | WebP, 512 × 512     |
+| `public/logo.webp`                           | Official Misyatech horizontal logo (light surfaces)           | WebP, 960 × 165     |
+| `public/logo-dark.webp`                      | Official Misyatech horizontal logo (dark navy footer)         | WebP, 960 × 165     |
+| `public/icon.webp`                           | Misyatech folded-A emblem icon on Deep Navy tile              | WebP, 512 × 512     |
 
-Technology partner marks under `public/brands/*.svg` remain crisp vector SVGs. Browser-standard PWA/ICO icons (`favicon.ico`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`) are generated alongside WebP variants by `scripts/generate-misyatech-icons.mjs`.
+Technology partner marks under `public/brands/*.svg` remain crisp vector SVGs. Browser-standard PWA/ICO icons (`favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `src/app/icon.png`, `src/app/apple-icon.png`, `src/app/favicon.ico`) are generated alongside WebP variants from the official logo by `scripts/generate-brand-assets.mjs`.

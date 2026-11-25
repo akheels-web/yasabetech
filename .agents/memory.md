@@ -4,7 +4,7 @@
 - **Framework Upgrade (November 2026)**: Upgraded `next` and `eslint-config-next` from `16.4.0` to `16.4.6` (`experimental.agentUpgrade: "security"` set in `next.config.ts`) to resolve published Next.js security advisory.
 - **Brand Identity**: Rebranded from **Yasabe Technologies** to **Misyatech** (`ميسياتك`), domain `misyatech.com`, enquiry mailbox `sales@misyatech.com`.
 - **Target Markets**: **Oman (Muscat, Sohar, Duqm, Salalah)** and **Dubai / United Arab Emirates**.
-- **Logo Strategy**: Geometric interlocking **"M"** monogram rendered in `src/components/brand-logo.tsx` with `USE_CUSTOM_LOGO_IMAGE = false` (referencing `public/logo.webp`) so the owner can drop in their custom logo later and flip the boolean or overwrite `public/logo.webp`.
+- **Logo Strategy**: Official Misyatech logo integrated in `src/components/brand-logo.tsx` using `public/logo.webp` (960×165, light surfaces) and `public/logo-dark.webp` (960×165, white-remapped `MiSY` + intact cyan/cobalt `A` ribbon for dark navy footer), with square favicons/PWA icons (`icon.webp`, `favicon.ico`, `icon.png`, `apple-icon.png`, `icon-192.png`, `icon-512.png`) extracted cleanly from the folded `A` emblem via connected-component segmentation in `scripts/generate-brand-assets.mjs`.
 - **Color Palette (Architectural Navy & Light Blue + Purple Optical Image Veils)**:
   - Deepest / Hero Navy: `#050E1E` / `#07142B` / `#0D1F3C`
   - Cobalt Primary: `#1D4ED8` / `#2563EB`
